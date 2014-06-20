@@ -38,7 +38,7 @@ YELLOW="\[\e[1;33m\]"
 if [[ $EUID == 0 ]] ; then
   PS1="\$(if [[ \$? == 0 ]]; then echo \"$CYAN>>> $NORMAL\$?\"; else echo \"$YELLOW-!- $NORMAL\$?\"; fi) $RED\u $NORMAL[ \W ]$RED $RED# $NORMAL"
 else
-  PS1="\$(if [[ \$? == 0 ]]; then echo \"$CYAN>>> $NORMAL\$?\"; else echo \"$YELLOW-!- $NORMAL\$?\"; fi) $RED\u $NORMAL[ \W ]$RED $GREEN\$ $NORMAL"
+  PS1="\$(if [[ \$? == 0 ]]; then echo \"$CYAN>>> $NORMAL\$?\"; else echo \"$YELLOW-!- $NORMAL\$?\"; fi) $GREEN\u $NORMAL[ \W ]$RED $GREEN\$ $NORMAL"
 fi
 
 # Extra Aliases for those lazy ones :)
