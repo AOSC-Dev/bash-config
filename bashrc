@@ -30,7 +30,7 @@ NORMAL="\[\e[0m\]"
 RED="\[\e[1;31m\]"
 GREEN="\[\e[1;32m\]"
 CYAN="\[\e[1;36m\]"
-YELLOW="\[\e[1;33m\]"
+YELLOW="\[\e[1;93m\]"
 
 # A simple error level reporting function.
 # Loaded back to PS1
@@ -39,7 +39,7 @@ _ret_prompt() {
   _ret=$?
   if ([[ $_ret != 127 ]] && [[ $_ret != 0 ]])
   then 
-    echo -e "\e[1;33m\x21"
+    echo -e "\e[1;93m\x21"
   elif [[ $_ret == 127 ]] 
   then 
     echo -e "\e[1;36m?"
