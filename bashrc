@@ -36,7 +36,18 @@ YELLOW="\[\e[1;33m\]"
 # Loaded back to PS1
 
 ret_prompt() {
-  if ([[ $? != 127 ]] && [[ $? != 0 ]]) ; then echo -e "\e[1;33m\x21"; elif [[ $? == 127 ]]; then echo -e "\e[1;33m?"; elif [[ $EUID == 0 ]]; then echo "#"; else echo "\$"; fi
+  if ([[ $? != 127 ]] && [[ $? != 0 ]])
+  then 
+    echo -e "\e[1;33m\x21"
+  elif [[ $? == 127 ]] 
+  then 
+    echo -e "\e[1;33m?"
+  elif [[ $EUID == 0 ]]
+  then 
+    echo "#"
+  else 
+    echo "\$"
+  fi
 }
 
 if [[ $EUID == 0 ]] ; then
