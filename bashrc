@@ -57,19 +57,18 @@ _ret_prompt() {
   fi
 }
 
-. /etc/bashrc_git &>/dev/null || true # To be included in the package"git"
-_git_branch &>/dev/null
+. /etc/bashrc_repo &>/dev/null || alias _repo_branch='true' # To be included in the package"git"
 
 # Declare an empty one if git is not installed.
-if [[ $? != 0 ]]; then alias _git_branch='true'; fi
+if [[ $? != 0 ]]; then alias _repo_branch='true'; fi
 
 # Use "\w" if you want the script to display full path
 # How about using cut to "\w($PWD)" to give path of a certain depth?
   # Well, forget it.
 if [[ $EUID == 0 ]] ; then
-  PS1="$RED\u $NORMAL[ \W\$(_git_branch) ]$RED \$(_ret_prompt) $NORMAL"
+  PS1="$RED\u $NORMAL[ \W\$(_repo_branch) ]$RED \$(_ret_prompt) $NORMAL"
 else
-  PS1="$GREEN\u $NORMAL[ \W\$(_git_branch) ]$GREEN \$(_ret_prompt) $NORMAL"
+  PS1="$GREEN\u $NORMAL[ \W\$(_repo_branch) ]$GREEN \$(_ret_prompt) $NORMAL"
 fi
 
 # Extra Aliases for those lazy ones :)
