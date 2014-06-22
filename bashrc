@@ -61,9 +61,9 @@ if [[ $? != 0 ]]; then alias _git_branch='true'; fi
 # How about using cut to "\w($PWD)" to give path of a certain depth?
   # Well, forget it.
 if [[ $EUID == 0 ]] ; then
-  PS1="$RED\u $NORMAL[ \W \$(_git_branch)]$RED \$(_ret_prompt) $NORMAL"
+  PS1="$RED\u $NORMAL[ \W\$(_git_branch) ]$RED \$(_ret_prompt) $NORMAL"
 else
-  PS1="$GREEN\u $NORMAL[ \W \$(_git_branch)]$GREEN \$(_ret_prompt) $NORMAL"
+  PS1="$GREEN\u $NORMAL[ \W\$(_git_branch) ]$GREEN \$(_ret_prompt) $NORMAL"
 fi
 
 # Extra Aliases for those lazy ones :)
