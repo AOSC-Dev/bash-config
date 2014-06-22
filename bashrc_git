@@ -40,7 +40,7 @@ _git_branch() {
     then printf "\e[1m@\e[0;32m$(__git_branch)\e[0m"
     else printf "\e[1m@$IRED$(__git_branch)\e[0m"
     fi
-  else true
+  else false
   fi
 }
 
