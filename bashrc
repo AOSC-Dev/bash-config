@@ -35,10 +35,14 @@ YELLOW="\[\e[1;33m\]"
 # A simple error level reporting function.
 # Loaded back to PS1
 
+ret_prompt() {
+  if [[ $? != 0 ]] ; then echo -e "\e[1;33m\x21"; elif [[ $EUID == 0 ]]; then echo "#"; else echo "\$"; fi
+}
+
 if [[ $EUID == 0 ]] ; then
-  PS1="\$(if [[ \$? == 0 ]]; then echo \"$CYAN>>> $NORMAL\$?\"; else echo \"$YELLOW-!- $NORMAL\$?\"; fi) $RED\u $NORMAL[ \W ]$RED $RED# $NORMAL"
+  PS1="$RED\u $NORMAL[ \W ]$RED \$(ret_prompt) $NORMAL"
 else
-  PS1="\$(if [[ \$? == 0 ]]; then echo \"$CYAN>>> $NORMAL\$?\"; else echo \"$YELLOW-!- $NORMAL\$?\"; fi) $GREEN\u $NORMAL[ \W ]$RED $GREEN\$ $NORMAL"
+  PS1="$GREEN\u $NORMAL[ \W ]$RED ${GREEN}\$(ret_prompt) $NORMAL"
 fi
 
 # Extra Aliases for those lazy ones :)
