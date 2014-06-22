@@ -1,0 +1,15 @@
+# bashrc_repo, the version control display for AOSC OSes PS1.
+# by Arthur Wang
+
+
+# Tests
+. /etc/bashrc_git &>/dev/null; _hasgit=$?
+. /etc.bashrc_hg &>/dev/null; _hashg=$?
+. /etc/bashrc_svn &>/dev/null; _hassvn=$?
+
+# Output
+_repo_branch() {
+  ret=$?
+  _git_branch || _hg_branch || _svn_branch
+  return $?
+}

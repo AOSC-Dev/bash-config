@@ -1,0 +1,48 @@
+# bashrc extra functions written for AOSC OSes, package "hg"
+# by Arthur Wang
+
+[ "$TERMCOLOR"=="8" ] && IRED="\e[0;31m" || IRED="\e[0;91m"
+
+# Aliases, mostly from http://blog.sina.com.cn/s/blog_630c58cb01011uid.html
+alias g="hg status"
+alias ga="hg add"
+alias gaa="hg add ."
+alias gau="hg add -u"
+alias gc="hg commit -m"
+alias gca="hg commit -am"
+alias gb="hg branch"
+alias gbd="hg branch -d"
+alias gco="hg checkout"
+alias gcob="hg checkout -b"
+alias gt="hg stash"
+alias gta="hg stash apply"
+alias gm="hg merge"
+alias gr="hg rebase"
+alias gl="hg log --oneline --decorate --graph"
+alias gs="hg show"
+alias gd="hg diff"
+alias gdc="hg diff --cached"
+alias gbl="hg blame"
+alias gps="hg push"
+alias gpl="hg pull"
+
+
+# Prompt
+alias __hg_branch="hg branch 2>/dev/null"
+
+# From http://mediadoneright.com/content/ultimate-hg-ps1-bash-prompt
+_hg_branch() {
+  # Avoid conflict with _ret_status
+  hg branch &>/dev/null
+  if [ "$?" == 0 ] 
+  then LANG=C hg status | grep " " &>/dev/null 
+    if [ "$?" != 0 ] 
+    then printf "\e[1m@\e[0;32m$(__hg_branch)\e[0m"
+    else printf "\e[1m@$IRED$(__hg_branch)\e[0m"
+    fi
+  else true
+  fi
+}
+
+# A shorter one without color
+# alias _hg_branch="__hg_branch"
