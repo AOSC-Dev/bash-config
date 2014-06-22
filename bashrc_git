@@ -1,0 +1,37 @@
+# Written for AOSC OSes
+# by Arthur Wang
+
+# Aliases, mostly from http://blog.sina.com.cn/s/blog_630c58cb01011uid.html
+alias g="git status"
+alias ga="git add"
+alias gaa="git add ."
+alias gau="git add -u"
+alias gc="git commit -m"
+alias gca="git commit -am"
+alias gb="git branch"
+alias gbd="git branch -d"
+alias gco="git checkout"
+alias gcob="git checkout -b"
+alias gt="git stash"
+alias gta="git stash apply"
+alias gm="git merge"
+alias gr="git rebase"
+alias gl="git log --oneline --decorate --graph"
+alias gs="git show"
+alias gd="git diff"
+alias gdc="git diff --cached"
+alias gbl="git blame"
+alias gps="git push"
+alias gpl="git pull"
+
+
+# Prompt
+# From http://mediadoneright.com/content/ultimate-git-ps1-bash-prompt
+alias __git_branch="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/(\1)/'"
+
+_git_branch() {
+  git branch &>/dev/null && ( (git status | grep "nothing to commit" &>/dev/null) && printf "\e[0;32m$(__git_branch)\e[0m" || printf "\e[0;91m$(__git_branch)\e[0m") || true
+}
+
+# A shorter one
+# _git_branch() { __git_branch || true; }
