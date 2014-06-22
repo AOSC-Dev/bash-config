@@ -1,6 +1,8 @@
 # bashrc_git Written for AOSC OSes
 # by Arthur Wang
 
+[ "$TERMCOLOR"=="8" ] && IRED="\e[0;31m" || IRED="\e[0;91m"
+
 # Aliases, mostly from http://blog.sina.com.cn/s/blog_630c58cb01011uid.html
 alias g="git status"
 alias ga="git add"
@@ -36,7 +38,7 @@ _git_branch() {
   then LANG=C git status | grep "nothing to commit" &>/dev/null 
     if [ "$?" == 0 ] 
     then printf "@\e[0;32m$(__git_branch)\e[0m"
-    else printf "@\e[0;91m$(__git_branch)\e[0m"
+    else printf "@$IRED$(__git_branch)\e[0m"
     fi
   else true
   fi
