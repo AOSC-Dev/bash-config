@@ -51,10 +51,13 @@ _ret_prompt() {
   fi
 }
 
+# Use "\w" if you want the script to display full path
+# How about using cut to "\w($PWD)" to give path of a certain depth?
+  # Well, forget it.
 if [[ $EUID == 0 ]] ; then
   PS1="$RED\u $NORMAL[ \W ]$RED \$(_ret_prompt) $NORMAL"
 else
-  PS1="$GREEN\u $NORMAL[ \W ]$RED ${GREEN}\$(_ret_prompt) $NORMAL"
+  PS1="$GREEN\u $NORMAL[ \W ]$GREEN \$(_ret_prompt) $NORMAL"
 fi
 
 # Extra Aliases for those lazy ones :)
