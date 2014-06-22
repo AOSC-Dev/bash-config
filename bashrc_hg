@@ -29,21 +29,20 @@ alias hpl="hg pull"
 
 
 # Prompt
-alias __hg_branch="hg branch 2>/dev/null"
 
 # From http://mediadoneright.com/content/ultimate-hg-ps1-bash-prompt
 _hg_branch() {
   # Avoid conflict with _ret_status
   hg branch &>/dev/null
   if [ "$?" == 0 ] 
-  then LANG=C hg status | hrep " " &>/dev/null 
+  then LANG=C hg status | grep " " &>/dev/null 
     if [ "$?" != 0 ] 
-    then printf "\e[1m@\e[0;32m$(__hg_branch)\e[0m"
-    else printf "\e[1m@$IRED$(__hg_branch)\e[0m"
+    then printf "\e[1m@\e[0;32m$(hg branch)\e[0m"
+    else printf "\e[1m@$IRED$(hg branch)\e[0m"
     fi
   else false
   fi
 }
 
 # A shorter one without color
-# alias _hg_branch="__hg_branch"
+# alias _hg_branch="echo \" \$(hg branch 2>/dev/null)\""
