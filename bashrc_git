@@ -33,7 +33,7 @@ _git_branch() {
   _ret=$?
   git branch &>/dev/null
   if [ "$?" == 0 ] 
-  then git status | grep "nothing to commit" &>/dev/null 
+  then LANG=C git status | grep "nothing to commit" &>/dev/null 
     if [ "$?" == 0 ] 
     then printf "\e[0;32m$(__git_branch)\e[0m"
     else printf "\e[0;91m$(__git_branch)\e[0m"
