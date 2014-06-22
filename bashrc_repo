@@ -4,12 +4,16 @@
 
 # Tests
 . /etc/bashrc_git &>/dev/null; _hasgit=$?
-. /etc.bashrc_hg &>/dev/null; _hashg=$?
+. /etc/bashrc_hg &>/dev/null; _hashg=$?
+. /etc/bashrc_bzr &>/dev/null; _hasbzr=$?
 . /etc/bashrc_svn &>/dev/null; _hassvn=$?
 
 # Output
-_repo_branch() {
+_repo_status() {
   ret=$?
-  _git_branch 2>/dev/null || _hg_branch 2>/dev/null || _svn_branch 2>/dev/null
+  _git_branch 2>/dev/null || _hg_branch 2>/dev/null || _svn_status 2>/dev/null ||  _bzr_branch 2>/dev/null
   return $?
 }
+
+# If this file is simply copied into bashrc, then we don't need `return _ret`.
+# Simply delete the `_ret=$?` in _ret_prompt().
