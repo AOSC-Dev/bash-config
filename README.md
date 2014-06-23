@@ -11,7 +11,7 @@ bashrc\_git
 ---
 Provides `git branch` PS1 function.
 
-Preview
+Preview, without color
 ---
 Error:
 * <font color=#255325>user</font>[ ~/git@<font color=2c1919>notcommited</font> ]<font color=#545527>!</font>
