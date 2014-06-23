@@ -30,7 +30,11 @@ NORMAL="\[\e[0m\]"
 RED="\[\e[1;31m\]"
 GREEN="\[\e[1;32m\]"
 CYAN="\[\e[1;36m\]"
-YELLOW="\[\e[1;93m\]"
+# Linux tty color
+if [ `tput colors`=="8" ] 
+then YELLOW="\e[1;33m"
+else YELLOW="\e[1;93m"
+fi
 
 # A simple error level reporting function.
 # Loaded back to PS1
@@ -39,7 +43,7 @@ _ret_prompt() {
   _ret=$?
   if ([[ $_ret != 127 ]] && [[ $_ret != 0 ]])
   then 
-    echo -e "\e[1;93m\x21"
+    echo -e "$YELLOW\x21"
   elif [[ $_ret == 127 ]] 
   then 
     echo -e "\e[1;36m?"
