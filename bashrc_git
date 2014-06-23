@@ -1,5 +1,6 @@
-# bashrc_git Written for AOSC OSes
+# bashrc extra functions written for AOSC OSes, package "git"
 # by Arthur Wang
+
 
 [ "$TERMCOLOR"=="8" ] && IRED="\e[0;31m" || IRED="\e[0;91m"
 
