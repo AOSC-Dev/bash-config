@@ -14,11 +14,11 @@ Provides `git branch` PS1 function.
 Preview
 ---
 Error:
-* <font color=green>user</font>[ ~/git@<font color=red>notcommited</font> ]<font color=yellow>!</font>
+* <font color=#255325>user</font>[ ~/git@<font color=2c1919>notcommited</font> ]<font color=#545527>!</font>
 
 Command not found:
-* <font color=red>root</font>[ ~/foo@<font color=green>nothingToCommitBranch</font> ]<font color=cyan>?</font>
+* <font color=#462222>root</font>[ ~/foo@<font color=#183B18>nothingToCommitBranch</font> ]<font color=#255152>?</font>
 
 Normal:
-* <font color=red>root</font>[ ~/bar@<font color=green>BarBranch</font> ]<font color=red>#</font>
-* <font color=green>user</font>[ ~/nogit ]<font color=green>$</font>
+* <font color=#462222>root</font>[ ~/bar@<font color=#183B18>BarBranch</font> ]<font color=#462222>#</font>
+* <font color=#255325>user</font>[ ~/nogit ]<font color=#255325>$</font>
