@@ -45,4 +45,4 @@ _git_branch() {
 }
 
 # A shorter one without color
-# alias _git_branch="__git_branch"
+# alias _git_branch="echo \" \$(__git_branch)\""
