@@ -35,7 +35,7 @@ _git_branch() {
   if (git branch &>/dev/null) 
   then if (LANG=C git status | grep "nothing to commit" &>/dev/null)
       then printf "\e[1m@\e[0;32m$(__git_branch)\e[0m"
-      elif (LANG=C git status | grep "nothing added to commit")
+      elif (LANG=C git status | grep "nothing added to commit" &>/dev/null)
         then printf "\e[1m@\e[0;45m$(__git_branch)\e[0m"
       else printf "\e[1m@$IRED$(__git_branch)\e[0m"
     fi
