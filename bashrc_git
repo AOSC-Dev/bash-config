@@ -32,6 +32,7 @@ alias gpl="git pull"
 alias __git_branch="git branch 2>/dev/null | grep '*' | sed 's/*\ //g'"
 
 # From http://mediadoneright.com/content/ultimate-git-ps1-bash-prompt
+# Modified.
 _git_branch() {
   if (git branch &>/dev/null) 
   then if (LANG=C git status | grep "nothing to commit" &>/dev/null)

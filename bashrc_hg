@@ -4,7 +4,6 @@
 [ "$TERMCOLOR"=="8" ] && IRED="\e[0;31m" || IRED="\e[0;91m"
 
 # Aliases from https://gist.github.com/shukydvir/1112265
-# TODO To be updated
 alias hl='hg pull'
 alias hp='hg push'
 alias hd='hg diff'
@@ -14,10 +13,8 @@ alias hb='hg branch'
 alias hs='hg status'
 alias ha='hg add .'
 
-
-# Prompt
-
 # From http://mediadoneright.com/content/ultimate-hg-ps1-bash-prompt
+# Modified for hg.
 _hg_branch() {
   if (hg branch &>/dev/null) 
     then if (LANG=C hg status | grep " " &>/dev/null)
