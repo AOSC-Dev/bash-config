@@ -9,7 +9,16 @@ bashrc
 ---
 The main bashrc file.
 
-bashrc\_git
+bashrc\_repo
 ---
-Provides `git branch` PS1 function.
+Provides repo branch/status PS1 function.
 
+###bashrc_git
+Provides git branch and status info in the PS1.
+
+Also provides aliases.
+
+###bashrc_hg
+Provides hg branch and status info in the PS1.
+
+Also provides aliases.
