@@ -33,8 +33,7 @@ alias __git_branch="git branch 2>/dev/null | grep '*' | sed 's/*\ //g'"
 
 # From http://mediadoneright.com/content/ultimate-git-ps1-bash-prompt
 _git_branch() {
-  _ret=$? # Avoid conflict with _ret_status
-  if (git branch &>/dev/null)
+  if (git branch &>/dev/null) 
   then if (LANG=C git status | grep "nothing to commit" &>/dev/null)
       then printf "\e[1m@\e[0;32m$(__git_branch)\e[0m"
       elif (LANG=C git status | grep "nothing added to commit" &>/dev/null)
@@ -42,9 +41,8 @@ _git_branch() {
       else printf "\e[1m@$IRED$(__git_branch)\e[0m"
     fi
   fi
-  return $_ret
 }
 
 
 # A shorter one without color
-# _git_branch() { _ret=$?; __git_branch; return $_ret; }
+# alias _git_branch="echo \" \$(__git_branch)\""
