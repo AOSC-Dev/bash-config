@@ -26,14 +26,12 @@ alias grep='grep --color=auto'
 # Provides prompt for non-login shells, specifically shells started
 # in the X environment. 
 
-TERMCOLOR=`tput colors`
-
 NORMAL="\[\e[0m\]"
 RED="\[\e[1;31m\]"
 GREEN="\[\e[1;32m\]"
 CYAN="\[\e[1;36m\]"
 # Linux tty color
-if [ "$TERMCOLOR"=="8" ] 
+if [ `tput colors`=="8" ] 
 then YELLOW="\e[1;33m"
 else YELLOW="\e[1;93m"
 fi

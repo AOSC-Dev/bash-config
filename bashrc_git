@@ -1,6 +1,7 @@
 # bashrc extra functions written for AOSC OSes, package "git"
 # by Arthur Wang
 
+
 [ "$TERMCOLOR"=="8" ] && IRED="\e[0;31m" || IRED="\e[0;91m"
 
 # Aliases, mostly from http://blog.sina.com.cn/s/blog_630c58cb01011uid.html
@@ -41,6 +42,7 @@ _git_branch() {
     fi
   fi
 }
+
 
 # A shorter one without color
 # alias _git_branch="echo \" \$(__git_branch)\""
