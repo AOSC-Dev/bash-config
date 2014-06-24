@@ -29,4 +29,4 @@ The master branch of this repo can be easily ported to other platforms with bash
 
 If you use BSD coreutils, just change `ls --color=auto` to `ls -G`.
 
-This package provides an example: [Bash 4.3 for OS X](http://pan.baidu.com/s/1pJAvUHl)
+This package provides an example: [Bash 4.3 for OS X](http://pan.baidu.com/s/1c0xlkFu)
