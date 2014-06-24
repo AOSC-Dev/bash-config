@@ -3,29 +3,16 @@
 
 [ "$TERMCOLOR"=="8" ] && IRED="\e[0;31m" || IRED="\e[0;91m"
 
-# Aliases, mostly from http://blog.sina.com.cn/s/blog_630c58cb01011uid.html
+# Aliases from https://gist.github.com/shukydvir/1112265
 # TODO To be updated
-alias h="hg status"
-alias ha="hg add"
-alias haa="hg add ."
-alias hau="hg add -u"
-alias hc="hg commit -m"
-alias hca="hg commit -am"
-alias hb="hg branch"
-alias hbd="hg branch -d"
-alias hco="hg checkout"
-alias hcob="hg checkout -b"
-alias ht="hg stash"
-alias hta="hg stash apply"
-alias hm="hg merge"
-alias hr="hg rebase"
-alias hl="hg log --oneline --decorate --graph"
-alias hs="hg show"
-alias hd="hg diff"
-alias hdc="hg diff --cached"
-alias hbl="hg blame"
-alias hps="hg push"
-alias hpl="hg pull"
+alias hl='hg pull'
+alias hp='hg push'
+alias hd='hg diff'
+alias hc='hg commit'
+alias hco='hg checkout'
+alias hb='hg branch'
+alias hs='hg status'
+alias ha='hg add .'
 
 
 # Prompt
