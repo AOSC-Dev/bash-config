@@ -56,16 +56,16 @@ _ret_prompt() {
 }
 
 _ret_same() { return $?; }
-. /etc/bashrc_repo &>/dev/null || alias _repo_status='_ret_same' # Fallback
+. /etc/bashrc_repo &>/dev/null || alias _git_branch='_ret_same' # Fallback
 # To be shipped together. See comments in bashrc_repo on _ret and _ret_status().
 
 # Use "\w" if you want the script to display full path
 # How about using cut to "\w($PWD)" to give path of a certain depth?
   # Well, forget it.
 if [[ $EUID == 0 ]] ; then
-  PS1="$RED\u $NORMAL[ \W\$(_repo_status) ]$RED \$(_ret_prompt) $NORMAL"
+  PS1="$RED\u $NORMAL[ \W\$(_git_branch) ]$RED \$(_ret_prompt) $NORMAL"
 else
-  PS1="$GREEN\u $NORMAL[ \W\$(_repo_status) ]$GREEN \$(_ret_prompt) $NORMAL"
+  PS1="$GREEN\u $NORMAL[ \W\$(_git_branch) ]$GREEN \$(_ret_prompt) $NORMAL"
 fi
 
 # Extra Aliases for those lazy ones :)
