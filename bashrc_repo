@@ -1,18 +1,17 @@
 # bashrc_repo, the version control display for AOSC OSes PS1.
 # by Arthur Wang
 
+# This module is highly extensible. Just read the source.
+# Long-term TODO: svn, vns and bzr.
 
-# Tests
-. /etc/bashrc_git &>/dev/null; _hasgit=$?
-. /etc/bashrc_hg &>/dev/null; _hashg=$?
-. /etc/bashrc_bzr &>/dev/null; _hasbzr=$?
-. /etc/bashrc_svn &>/dev/null; _hassvn=$?
+# Get functions
+. /etc/bashrc_git &>/dev/null
+. /etc/bashrc_hg &>/dev/null
 
 # Output
 _repo_status() {
   ret=$?
-  _git_branch 2>/dev/null || _hg_branch 2>/dev/null || _svn_status 2>/dev/null ||  _bzr_branch 2>/dev/null
-  return $?
+  _git_branch 2>/dev/null || _hg_branch 2>/dev/null
 }
 
 # If this file is simply copied into bashrc, then we don't need `return _ret`.
