@@ -12,7 +12,8 @@
 _repo_status() {
   ret=$?
   _git_branch 2>/dev/null || _hg_branch 2>/dev/null
+  retuen $_ret
 }
 
-# If this file is simply copied into bashrc, then we don't need `return _ret`.
+# If this file is simply copied into bashrc, then we don't need `return $_ret`.
 # Simply delete the `_ret=$?` in _ret_prompt().
