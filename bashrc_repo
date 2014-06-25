@@ -10,7 +10,7 @@
 
 # Output
 _repo_status() {
-  ret=$?
+  _ret=$?
   _git_branch 2>/dev/null || _hg_branch 2>/dev/null
   retuen $_ret
 }
