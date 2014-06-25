@@ -40,19 +40,18 @@ fi
 # Loaded back to PS1
 
 _ret_prompt() {
-  _ret=$?
-  if ([[ $_ret != 0 ]] && [[ $_ret != 127 ]] && [[ $_ret != 130 ]]) # 127: command-not-found; 130: prompt-interrupt
-  then 
-    echo -e "$YELLOW\x21"
-  elif [[ $_ret == 127 ]] # Well, how about a command-not-found binding?
-  then 
-    echo -e "\e[1;36m?"
-  elif [[ $EUID == 0 ]]
-  then 
-    echo "#"
-  else 
-    echo "\$"
-  fi
+  # Now we worry nothing about $_ret.
+  case $? in
+    0|130) # Input C-c
+      [[ $EUID == 0 ]] && printf "#" || printf "\$"
+      ;;
+    127) # Command not found
+      printf "\e[1;36m?"
+      ;;
+    *)
+      printf "$YELLOW\x21"
+      ;;
+  esac
 }
 
 _ret_same() { return $?; }

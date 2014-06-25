@@ -12,7 +12,7 @@
 _repo_status() {
   _ret=$?
   _git_branch 2>/dev/null || _hg_branch 2>/dev/null
-  retuen $_ret
+  return $_ret
 }
 
 # If this file is simply copied into bashrc, then we don't need `return $_ret`.
