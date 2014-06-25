@@ -55,11 +55,9 @@ _ret_prompt() {
   fi
 }
 
-. /etc/bashrc_repo &>/dev/null || alias _repo_status='true' # Fallback
+_ret_same() { return $?; }
+. /etc/bashrc_repo &>/dev/null || alias _repo_status='_ret_same' # Fallback
 # To be shipped together. See comments in bashrc_repo on _ret and _ret_status().
-
-# Declare an empty one if git is not installed.
-if [[ $? != 0 ]]; then alias _repo_status='true'; fi
 
 # Use "\w" if you want the script to display full path
 # How about using cut to "\w($PWD)" to give path of a certain depth?
