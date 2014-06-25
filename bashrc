@@ -55,11 +55,9 @@ _ret_prompt() {
   fi
 }
 
-. /etc/bashrc_git &>/dev/null || true # To be included in the package"git"
-_git_branch &>/dev/null
+_ret_same() { return $?; }
 
-# Declare an empty one if git is not installed.
-if [[ $? != 0 ]]; then alias _git_branch='true'; fi
+. /etc/bashrc_git &>/dev/null || alias _git_branch='_ret_same'
 
 # Use "\w" if you want the script to display full path
 # How about using cut to "\w($PWD)" to give path of a certain depth?
