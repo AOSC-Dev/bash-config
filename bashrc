@@ -41,10 +41,10 @@ fi
 
 _ret_prompt() {
   _ret=$?
-  if ([[ $_ret != 127 ]] && [[ $_ret != 0 ]])
+  if ([[ $_ret != 0 ]] && [[ $_ret != 127 ]] && [[ $_ret != 130 ]]) # 127: command-not-found; 130: prompt-interrupt
   then 
     echo -e "$YELLOW\x21"
-  elif [[ $_ret == 127 ]] 
+  elif [[ $_ret == 127 ]] # Well, how about a command-not-found binding?
   then 
     echo -e "\e[1;36m?"
   elif [[ $EUID == 0 ]]
