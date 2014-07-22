@@ -16,8 +16,6 @@
 # Provides a colored /bin/ls command.  Used in conjunction with code in
 # /etc/profile.
 
-export PATH="/usr/bin"
-
 alias ls='ls --color=auto'
 alias l='ls -alh'
 alias ll='ls -lh'
