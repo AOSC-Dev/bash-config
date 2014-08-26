@@ -23,6 +23,12 @@ alias la='ls -a'
 
 alias grep='grep --color=auto'
 
+if [ -f /etc/im/default.conf ]
+  source /etc/im/default.conf
+else
+  true
+fi
+
 # Provides prompt for non-login shells, specifically shells started
 # in the X environment. 
 
