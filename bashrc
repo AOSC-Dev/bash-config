@@ -13,8 +13,9 @@
 # should go into ~/.bash_profile.  Personal aliases and functions should
 # go into ~/.bashrc
 
-# Provides a colored /bin/ls command.  Used in conjunction with code in
-# /etc/profile.
+# Provides a colored /bin/ls command.  Used in conjunction with code in /etc/profile.
+
+source /etc/profile
 
 alias ls='ls --color=auto'
 alias l='ls -alh'
@@ -22,8 +23,6 @@ alias ll='ls -lh'
 alias la='ls -a'
 
 alias grep='grep --color=auto'
-
-source /etc/im/default.conf
 
 # Provides prompt for non-login shells, specifically shells started
 # in the X environment. 
