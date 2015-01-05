@@ -16,7 +16,6 @@
 # Provides a colored /bin/ls command.  Used in conjunction with code in /etc/profile.
 
 . /etc/profile
-
 alias l='ls -alh'
 alias ll='ls -lh'
 alias la='ls -a'
@@ -32,8 +31,8 @@ GREEN="\[\e[1;32m\]"
 CYAN="\[\e[1;36m\]"
 # Linux tty color
 if [ `tput colors`=="8" ] 
-then YELLOW="\e[1;33m"
-else YELLOW="\e[1;93m"
+then YELLOW='\e[1;33m'
+else YELLOW='\e[1;93m'
 fi
 
 # A simple error level reporting function.
@@ -43,13 +42,13 @@ _ret_prompt() {
   # Now we worry nothing about $_ret.
   case $? in
     0|130) # Input C-c
-      [[ $EUID == 0 ]] && printf "#" || printf "\$"
+      [[ $EUID == 0 ]] && printf '#' || printf '$'
       ;;
     127) # Command not found
-      printf "\e[1;36m?"
+      printf '\e[1;36m?'
       ;;
     *)
-      printf "$YELLOW\x21"
+      printf $YELLOW'!'
       ;;
   esac
 }
