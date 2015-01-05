@@ -15,14 +15,13 @@
 
 # Provides a colored /bin/ls command.  Used in conjunction with code in /etc/profile.
 
-source /etc/profile
+. /etc/profile
 
-alias ls='ls --color=auto'
 alias l='ls -alh'
 alias ll='ls -lh'
 alias la='ls -a'
-
-alias grep='grep --color=auto'
+for c in {e,f,}grep {v,}dir ls; do alias $c="$c --color=auto"; done; unset c
+# which(){ (alias; declare -F) | /usr/bin/which -i --read-functions "$@"; }
 
 # Provides prompt for non-login shells, specifically shells started
 # in the X environment. 
@@ -67,6 +66,9 @@ if [[ $EUID == 0 ]] ; then
 else
   PS1="$GREEN\u $NORMAL[ \W\$(_repo_status) ]$GREEN \$(_ret_prompt) $NORMAL"
 fi
+
+# Completion, wow
+[ -e /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
 # Extra Aliases for those lazy ones :)
 alias ..='cd ..'
