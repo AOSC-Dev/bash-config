@@ -15,6 +15,9 @@
 
 # Provides a colored /bin/ls command.  Used in conjunction with code in /etc/profile.
 
+# Temporary Debug Measures.
+set -xv
+
 . /etc/profile
 alias l='ls -alh'
 alias ll='ls -lh'
