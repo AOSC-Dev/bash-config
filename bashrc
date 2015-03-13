@@ -93,11 +93,16 @@ _last_dir() {
 
 if [ "$LASTDIR" = "yes" ]; then
     if [ -e ~/.last_directory ]; then
-        if [ -d $(cat ~/.last_directory) ]; then
-            printf "$YELLOW>>>\t\033[36mReturning you to the last directory...\033[0m \"`cat ~/.last_directory`\"\n"
-            _last_dir
+        if [ -s ~/.last_directory ]; then
+            if [ -d $(cat ~/.last_directory) ]; then
+                printf "$YELLOW>>>\t\033[36mReturning you to the last directory...\033[0m \"`cat ~/.last_directory`\"\n"
+                _last_dir
+            else
+                printf "$YELLOW>>>\t\033[36mLast recorded directory cannot be accessed or was already removed,\n\treturning to \033[0m$HOME \033[36m...\033[0m\n"
+                cd $HOME
+            fi
         else
-            printf "$YELLOW>>>\t\033[36mLast recorded directory cannot be accessed or was already removed,\n\treturning to \033[0m$HOME \033[36m...\033[0m\n"
+            printf "$YELLOW>>>\t\033[36mLast record empty?! Go back to your home!\033[0m\n"
             cd $HOME
         fi
     else
