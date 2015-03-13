@@ -1,0 +1,6 @@
+PKGNAME=bash-startup
+PKGVER=2
+PKGREL=7
+PKGDEP="bash"
+PKGSEC=misc
+PKGDES="Generic Bash Startup Files for AOSC OS"

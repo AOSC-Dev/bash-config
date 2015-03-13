@@ -1,0 +1,4 @@
+mkdir -p abdist/etc/profile.d
+install -m755 *.sh abdist/etc/profile.d/
+install -m644 {bash*,profile} abdist/etc/
+cp -r skel abdist/etc/
