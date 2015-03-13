@@ -93,8 +93,13 @@ _last_dir() {
 
 if [ "$LASTDIR" = "yes" ]; then
     if [ -e ~/.last_directory ]; then
-        printf "$YELLOW>>> \033[36mReturning you to the last directory...\033[0m \"`cat ~/.last_directory`\"\n"
-        _last_dir
+        if [ -d $(cat ~/.last_directory) ]; then
+            printf "$YELLOW>>>\t\033[36mReturning you to the last directory...\033[0m \"`cat ~/.last_directory`\"\n"
+            _last_dir
+        else
+            printf "$YELLOW>>>\t\033[36mLast recorded directory cannot be accessed or was already removed,\n\treturning to $HOME...\033[0m\n"
+            cd $HOME
+        fi
     else
         true
     fi
@@ -103,7 +108,7 @@ else
 fi
 
 _record() {
-    printf "$YELLOW>>> \033[36mRecording your current working directory...\033[0m\n"
+    printf "$YELLOW>>>\t\033[36mRecording your current working directory...\033[0m\n"
     echo $PWD | tee > ~/.last_directory
     return 0
 }
