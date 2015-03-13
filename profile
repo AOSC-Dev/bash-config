@@ -128,42 +128,6 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias nano='nano -w'
 
-# Last directory recoding measure.
-_last_dir() {
-    local _ret=0
-    cd $(cat ~/.last_directory)
-    return $_ret
-}
-
-if [ "$LASTDIR" = "yes" ]; then
-    if [ -e ~/.last_directory ]; then
-        if [ -s ~/.last_directory ]; then
-            if [ -d $(cat ~/.last_directory) ]; then
-                printf "$YELLOW>>>\t\033[36mReturning you to the last directory...\033[0m \"`cat ~/.last_directory`\"\n"
-                _last_dir
-            else
-                printf "$YELLOW>>>\t\033[36mLast recorded directory cannot be accessed or was already removed,\n\treturning to \033[0m$HOME \033[36m...\033[0m\n"
-                cd $HOME
-            fi
-        else
-            printf "$YELLOW>>>\t\033[36mLast record empty?! Go back to your home!\033[0m\n"
-            cd $HOME
-        fi
-    else
-        true
-    fi
-else
-    true
-fi
-
-_record() {
-    printf "$YELLOW>>>\t\033[36mRecording your current working directory...\033[0m\n"
-    echo $PWD | tee > ~/.last_directory
-    return 0
-}
-
-trap _record EXIT
-
 # Now to clean up
 unset pathremove pathprepend pathappend
 
