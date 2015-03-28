@@ -1,6 +1,9 @@
 PKGNAME=bash-startup
 PKGVER=2
-PKGREL=9
-PKGDEP="bash"
+PKGREL=10
+PKGDEP=bash
 PKGSEC=misc
 PKGDES="Generic Bash Startup Files for AOSC OS"
+
+# HACK: generate conffiles
+find . -type f | grep -E '(profile|bashrc|skel)' > autobuild/conffiles

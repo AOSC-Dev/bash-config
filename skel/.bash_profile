@@ -18,7 +18,6 @@ append () {
        NEWPATH=${NEWPATH:+$NEWPATH:}$DIR
      fi
   done
-
   # Then append the directory
   export PATH=$NEWPATH:$1
 }

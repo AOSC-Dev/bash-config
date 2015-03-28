@@ -4,9 +4,12 @@
 # This module is highly extensible. Just read the source.
 # Long-term TODO: svn, vns and bzr.
 
+# We are not POSIX-compatible.
+shopt -oq posix && return
+
 # Get functions
-. /etc/bashrc_git &>/dev/null
-. /etc/bashrc_hg &>/dev/null
+. /etc/bashrc.d/.bashrc_git &>/dev/null
+. /etc/bashrc.d/.bashrc_hg &>/dev/null
 
 # Output
 _repo_status() {
