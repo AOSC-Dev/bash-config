@@ -21,13 +21,12 @@
 # Provides prompt for non-login shells, specifically shells started
 # in the X environment. 
 
-# Aliases for colored ls
-alias l='ls -alh'
-alias ll='ls -lh'
-alias la='ls -a'
+# Colors
+alias l='ls -AFlh'
+alias ll='ls -Flh'
+alias la='ls -AF'
 for c in {e,f,}grep {v,}dir ls; do alias $c="$c --color=auto"; done;
 
-# Colors for PS1
 NORMAL='\e[0m'
 RED='\e[1;31m'
 GREEN='\e[1;32m'
@@ -81,9 +80,18 @@ alias ....='cd ../../..'
 alias nano='nano -w'
 
 # Last directory recoding measure.
-_last_dir() { cd $(cat ~/.last_directory); }
+_lastdir_go() {
+  if [ -s ~/.last_directory ]; then
+    if [ -d $(cat ~/.last_directory) ]; then
+      echo -e "$YELLOW>>>\t${CYAN}Returning you to the last directory...$NORMAL \`$(cat ~/.last_directory)'"
+      cd $(cat ~/.last_directory)
+    else
+      echo -e "$YELLOW>>>\t${CYAN}Last recorded directory cannot be accessed or was already removed.$NORMAL"
+    fi
+  fi
+}
 
-_record() {
+_lastdir_rec() {
     local _ret=$? # Return value transparency is actually important here
     echo -ne "$YELLOW>>>\t\033[36mRecording your current working directory...\033[0m"
     pwd > ~/.last_directory

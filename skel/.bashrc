@@ -13,13 +13,6 @@ if [ -f "/etc/bashrc" ] ; then
   source /etc/bashrc
 fi
 
-if [[ "$LASTDIR" == yes && -s ~/.last_directory ]]; then
-  if [ -d $(cat ~/.last_directory) ]; then
-    echo -e "$YELLOW>>>\t\033[36mReturning you to the last directory...\033[0m \`$(cat ~/.last_directory)'"
-    _last_dir
-  else
-    echo -e "$YELLOW>>>\t\033[36mLast recorded directory cannot be accessed or was already removed.\033[0m"
-  fi
-fi
-
+# Restores last directory state.
+_lastdir_go
 # End ~/.bashrc

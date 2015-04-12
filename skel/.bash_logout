@@ -3,5 +3,5 @@
 # by James Robertson <jameswrobertson@earthlink.net>
 
 # Personal items to perform on logout.
-_record
+_lastdir_rec
 # End ~/.bash_logout
