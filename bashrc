@@ -27,10 +27,11 @@ alias ll='ls -Flh'
 alias la='ls -AF'
 for c in {e,f,}grep {v,}dir ls; do alias $c="$c --color=auto"; done;
 
-NORMAL='\e[0m'
-RED='\e[1;31m'
-GREEN='\e[1;32m'
-CYAN='\e[1;36m'
+NORMAL='\[\e[0m\]'
+RED='\[\e[1;31m\]'
+GREEN='\[\e[1;32m\]'
+CYAN='\[\e[1;36m\]'
+
 # Linux tty color workaround
 [ $(tput colors) == 8 ] && YELLOW='\e[1;33m' IRED="\e[0;31m" || YELLOW='\e[1;93m' IRED="\e[0;91m"
 
