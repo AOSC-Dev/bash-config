@@ -79,6 +79,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias nano='nano -w'
+alias ed='ed -p: -v' # ED for Eununchs hackers.
 
 # Last directory recoding measure.
 _lastdir_go() {
