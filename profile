@@ -53,6 +53,9 @@ export HISTIGNORE="&:[bf]g:exit"
 # Timezone variable $TZ, Wine and stuff alike need it.
 export TZ="$(readlink /etc/localtime | sed 's/^\.\.//g' | sed "s/\/usr\/share\/zoneinfo\///")"
 
+# And sync this setting onto /etc/timezone for weird stuff like indicator-datetime.
+echo $TZ > /etc/timezone
+
 for script in /etc/profile.d/*.sh ; do
 	[ -r $script ] && . $script
 done
