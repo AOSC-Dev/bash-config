@@ -50,6 +50,9 @@ fi
 export HISTSIZE=1000
 export HISTIGNORE="&:[bf]g:exit"
 
+# Timezone variable $TZ, Wine and stuff alike need it.
+export TZ="$(readlink /etc/localtime | sed 's/^\.\.//g' | sed "s/\/usr\/share\/zoneinfo\///")"
+
 for script in /etc/profile.d/*.sh ; do
 	[ -r $script ] && . $script
 done
