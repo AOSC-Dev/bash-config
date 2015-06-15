@@ -1,5 +1,5 @@
 PKGNAME=bash-startup
-PKGVER=2.1really0.4.1
+PKGVER=2.1really0.4.1.1
 PKGREL=0
 PKGDEP=bash
 PKGSEC=misc
