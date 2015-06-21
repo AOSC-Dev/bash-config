@@ -14,12 +14,23 @@
 # go into ~/.bashrc
 
 . /etc/profile
+
 # Systemd specific, as cutting off output sounds like a silly idea.
 
 # which(){ (alias; declare -F) | /usr/bin/which -i --read-functions "$@"; }
 
 # Provides prompt for non-login shells, specifically shells started
 # in the X environment. 
+
+# Use case-insensitive filename globbing
+shopt -s nocaseglob
+
+# Make bash append rather than overwrite the history on disk
+shopt -s histappend
+
+# When changing directory small typos can be ignored by bash
+# for example, cd /vr/lgo/apaache would find /var/log/apache
+shopt -s cdspell
 
 # Colors
 alias l='ls -AFlh'
