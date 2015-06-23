@@ -7,7 +7,9 @@
 # By Jeff Bai and Arthur Wang
 
 # System wide aliases and functions.
-[ "$BASH" ] || alias shopt=false
+[ "$BASH" ] || shopt(){ return ${shopt_def-0}; }
+_is_posix(){ shopt -oq posix; }
+
 # System wide environment variables and startup programs should go into
 # /etc/profile.  Personal environment variables and startup programs
 # should go into ~/.bash_profile.  Personal aliases and functions should
@@ -15,18 +17,15 @@
 
 . /etc/profile
 
-# Systemd specific, as cutting off output sounds like a silly idea.
-
-# which(){ (alias; declare -F) | /usr/bin/which -i --read-functions "$@"; }
-
 # Provides prompt for non-login shells, specifically shells started
 # in the X environment. 
-
 
 # Make bash append rather than overwrite the history on disk
 # Allows user to edit a failed hist exp.
 # Allows user to verify the results of hist exp.
 shopt -s histappend histreedit histverify
+HISTIGNORE='&:[bf]g:exit'
+HISTCONTROL='ignorespace'
 
 # When changing directory small typos can be ignored by bash
 # Chdirs into it if command is a dir
@@ -63,8 +62,7 @@ CYAN='\[\e[1;36m\]'
 _ret_prompt() {
   case $? in
     0|130) # Input C-c
-      printf '\$'
-      ;;
+      ((EUID)) && printf '$' || printf '#' ;;
     127) # Command not found
       printf '\e[1;36m?'
       ;;
@@ -86,9 +84,9 @@ declare -f _repo_status >/dev/null || ! echo _repo_status not declared, making s
 
 # Use "\w" if you want the script to display full path
 # How about using cut to "\w($PWD)" to give path of a certain depth?
- # Well, forget it.
+# Well, forget it.
 
-if [[ $EUID == 0 ]] ; then
+if [[ "$EUID" == 0 ]] ; then
   PS1="$RED\u $NORMAL[ \W\$(_repo_status) ]$RED \$(_ret_prompt) $NORMAL"
 else
   PS1="$GREEN\u $NORMAL[ \W\$(_repo_status) ]$GREEN \$(_ret_prompt) $NORMAL"
@@ -103,7 +101,11 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias nano='nano -w'
 alias ed='ed -p: -v' # ED for Eununchs hackers.
+_is_posix || which(){ (alias; declare -F) | /usr/bin/which -i --read-functions "$@"; }
 
+# Misc stuffs
+FIGNORE='~'
+TIMEFORMAT=$'\nreal\t%3lR\t%P%%\nuser\t%3lU\nsys\t%3lS'
 # Last directory recoding measure.
 _lastdir_go() {
   if [ -s ~/.last_directory ]; then
