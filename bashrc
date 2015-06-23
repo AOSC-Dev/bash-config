@@ -7,7 +7,7 @@
 # By Jeff Bai and Arthur Wang
 
 # System wide aliases and functions.
-
+[ "$BASH" ] || alias shopt=false
 # System wide environment variables and startup programs should go into
 # /etc/profile.  Personal environment variables and startup programs
 # should go into ~/.bash_profile.  Personal aliases and functions should
@@ -22,15 +22,25 @@
 # Provides prompt for non-login shells, specifically shells started
 # in the X environment. 
 
-# Use case-insensitive filename globbing
-shopt -s nocaseglob
 
 # Make bash append rather than overwrite the history on disk
-shopt -s histappend
+# Allows user to edit a failed hist exp.
+# Allows user to verify the results of hist exp.
+shopt -s histappend histreedit histverify
 
 # When changing directory small typos can be ignored by bash
-# for example, cd /vr/lgo/apaache would find /var/log/apache
-shopt -s cdspell
+# Chdirs into it if command is a dir
+# Chdirs into $var if var not found
+shopt -s cdspell autocd cdable_vars
+
+# Do not complete when readline buf is empty
+shopt -s no_empty_cmd_completion 
+
+# Extended glob (3.5.8.1) & find-all-glob with **
+shopt -s extglob globstar
+
+# Hashtable the commands!
+shopt -s checkhash
 
 # Colors
 alias l='ls -AFlh'
@@ -38,20 +48,22 @@ alias ll='ls -Flh'
 alias la='ls -AF'
 for c in {e,f,}grep {v,}dir ls; do alias $c="$c --color=auto"; done;
 
+# So they can be unset.
+_aosc_bashrc_colors='NORMAL RED GREEN CYAN IRED YELLOW'
 NORMAL='\[\e[0m\]'
 RED='\[\e[1;31m\]'
 GREEN='\[\e[1;32m\]'
 CYAN='\[\e[1;36m\]'
 
 # Linux tty color workaround
-[ $(tput colors) == 8 ] && YELLOW='\e[1;33m' IRED="\e[0;31m" || YELLOW='\e[1;93m' IRED="\e[0;91m"
+[ "$(tput colors)" == 8 ] && YELLOW='\e[1;33m' IRED="\e[0;31m" || YELLOW='\e[1;93m' IRED="\e[0;91m"
 
 # A simple error level reporting function.
 # Loaded back to PS1
 _ret_prompt() {
   case $? in
     0|130) # Input C-c
-      [[ $EUID == 0 ]] && printf '#' || printf '$'
+      printf '\$'
       ;;
     127) # Command not found
       printf '\e[1;36m?'
@@ -112,4 +124,5 @@ _lastdir_rec() {
 }
 
 unset c
+unalias shopt
 # End /etc/bashrc
