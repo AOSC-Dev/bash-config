@@ -10,10 +10,10 @@
 # ~/.bash_profile.  Personal aliases and functions should go into
 # ~/.bashrc.
 
+
+export PATH MANPATH
 _IFS="$IFS" IFS='
 '
-export PATH MANPATH
-
 for pth in $(cat /etc/paths.d/._* /etc/paths /etc/paths.d/*); do
 	[ "${pth:0:1}" != '#' ] && PATH="$PATH:$pth"
 done 2>/dev/null
@@ -21,6 +21,8 @@ done 2>/dev/null
 for pth in $(cat /etc/manpaths.d/._* /etc/manpaths /etc/manpaths.d/*); do
 	[ "${pth:0:1}" != '#' ] && MANPATH="$MANPATH:$pth"
 done 2>/dev/null
+IFS="$_IFS"
+
 : ${PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin}
 : ${MANPATH=/usr/share/man:/usr/local/share/man}
 
@@ -36,5 +38,4 @@ done
 
 # Now to clean up
 unset pth script
-IFS="$_IFS"
 # End /etc/profile
