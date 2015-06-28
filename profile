@@ -10,37 +10,21 @@
 # ~/.bash_profile.  Personal aliases and functions should go into
 # ~/.bashrc.
 
-# Functions to help us manage paths.  Second argument is the name of the
-# path variable to be modified (default: PATH)
-pathremove () {
-	local IFS=':'
-	local NEWPATH
-	local DIR
-	local PATHVARIABLE=${2:-PATH}
-	for DIR in ${!PATHVARIABLE} ; do
-		if [ "$DIR" != "$1" ] ; then
-		  NEWPATH=${NEWPATH:+$NEWPATH:}$DIR
-		fi
-	done
-	export $PATHVARIABLE="$NEWPATH"
-}
+_IFS="$IFS" IFS='
+'
+export PATH MANPATH
 
-pathprepend () {
-	pathremove $1 $2
-	local PATHVARIABLE=${2:-PATH}
-	export $PATHVARIABLE="$1${!PATHVARIABLE:+:${!PATHVARIABLE}}"
-}
+for pth in $(cat /etc/paths.d/._* /etc/paths /etc/paths.d/*); do
+	PATH="$PATH:$pth"
+done 2>/dev/null
 
-pathappend () {
-	pathremove $1 $2
-	local PATHVARIABLE=${2:-PATH}
-	export $PATHVARIABLE="${!PATHVARIABLE:+${!PATHVARIABLE}:}$1"
-}
-
+for pth in $(cat /etc/manpaths.d/._* /etc/manpaths /etc/manpaths.d/*); do
+	MANPATH="$MANPATH:$pth"
+done 2>/dev/null
+: ${PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin}
+: ${MANPATH=/usr/share/man:/usr/local/share/man}
 
 # Set the initial path
-export PATH=/bin:/usr/bin
-
 if [ $EUID -eq 0 ] ; then
 	pathappend /sbin:/usr/sbin
 	unset HISTFILE
@@ -57,6 +41,6 @@ for script in /etc/profile.d/*.sh ; do
 done
 
 # Now to clean up
-unset pathremove pathprepend pathappend script
-
+unset pth script
+IFS="$_IFS"
 # End /etc/profile
