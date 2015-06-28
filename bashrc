@@ -92,8 +92,6 @@ else
   PS1="$GREEN\u $NORMAL[ \W\$(_vcs_status) ]$GREEN \$(_ret_prompt) $NORMAL"
 fi
 
-# Completion, wow.
-shopt -oq posix || [ -e /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
 # Extra Aliases for those lazy ones :)
 alias ..='cd ..'
@@ -125,6 +123,5 @@ _lastdir_rec() {
     return $_ret
 }
 
-unset c
-unalias shopt
+unset script shopt
 # End /etc/bashrc
