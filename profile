@@ -24,12 +24,6 @@ done 2>/dev/null
 : ${PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin}
 : ${MANPATH=/usr/share/man:/usr/local/share/man}
 
-# Set the initial path
-if [ $EUID -eq 0 ] ; then
-	pathappend /sbin:/usr/sbin
-	unset HISTFILE
-fi
-
 # Setup some environment variables.
 export HISTFILESIZE=4096
 
