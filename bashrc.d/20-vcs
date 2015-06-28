@@ -26,7 +26,7 @@ _vcs_status() {
 	_ret=$?
 	local _vcs
 	for _vcs in $_vcs_mods; do
-		"$_vcs"_status && break
+		_"$_vcs"_branch && break
 	done
 	return $_ret
 }
