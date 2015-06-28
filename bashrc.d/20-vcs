@@ -1,0 +1,32 @@
+# 20-vcs, the version control display for AOSC OSes PS1.
+# by Arthur Wang
+
+# This module is highly extensible. Just read the source.
+# Long-term TODO: svn, vns and bzr.
+
+# We are not POSIX-compatible.
+_is_posix && return
+
+# Get functions
+_vcs_files="$(echo /etc/bashrc.d/.vcs_*)"
+if [ "$_vcs_files" == "/etc/bashrc.d/.vcs_*" ]; then
+	_vcs_status(){ true; }
+	unset _vcs_files
+	return
+else
+    for _vcs in $_vcs_files; do
+		. "$_vcs"
+		_vcs_mods+=" ${_vcs/\/etc\/bashrc.d\/.vcs_}"
+	done
+fi
+unset _vcs _vcs_files
+
+# Output
+_vcs_status() {
+	_ret=$?
+	local _vcs
+	for _vcs in $_vcs_mods; do
+		"$_vcs"_status && break
+	done
+	return $_ret
+}

@@ -77,8 +77,8 @@ _ret_same() { return $?; }
 # Base functions ready. Let's load bashrc.d.
 for c in /etc/bashrc.d/*; do . $c; done 
 
-# The prompt depends on repo_status! Get one backup anyway.
-declare -f _repo_status >/dev/null || ! echo _repo_status not declared, making stub.. || alias _repo_status=_ret_same
+# The prompt depends on vcs_status! Get one backup anyway.
+declare -f _vcs_status >/dev/null || ! echo _vcs_status not declared, making stub.. || alias _vcs_status=_ret_same
 
 # To be shipped together. See comments in bashrc_repo on _ret and _ret_status().
 
@@ -87,9 +87,9 @@ declare -f _repo_status >/dev/null || ! echo _repo_status not declared, making s
 # Well, forget it.
 
 if [[ "$EUID" == 0 ]] ; then
-  PS1="$RED\u $NORMAL[ \W\$(_repo_status) ]$RED \$(_ret_prompt) $NORMAL"
+  PS1="$RED\u $NORMAL[ \W\$(_vcs_status) ]$RED \$(_ret_prompt) $NORMAL"
 else
-  PS1="$GREEN\u $NORMAL[ \W\$(_repo_status) ]$GREEN \$(_ret_prompt) $NORMAL"
+  PS1="$GREEN\u $NORMAL[ \W\$(_vcs_status) ]$GREEN \$(_ret_prompt) $NORMAL"
 fi
 
 # Completion, wow.
