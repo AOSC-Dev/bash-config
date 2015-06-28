@@ -1,3 +1,0 @@
-# Set locale for legacy desktop environments that do not respect localectl.
-
-export LANG=$(cat /etc/locale.conf) LC_ALL=$(cat /etc/locale.conf)
