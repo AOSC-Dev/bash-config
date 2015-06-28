@@ -12,8 +12,10 @@
 
 
 export PATH MANPATH
-_IFS="$IFS" IFS='
-'
+_IFS=' 	
+' # $' \t\n'
+IFS='
+' # $'\n'
 for pth in $(cat /etc/paths.d/._* /etc/paths /etc/paths.d/*); do
 	[ "${pth:0:1}" != '#' ] && PATH="$PATH:$pth"
 done 2>/dev/null
