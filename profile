@@ -15,11 +15,11 @@ _IFS="$IFS" IFS='
 export PATH MANPATH
 
 for pth in $(cat /etc/paths.d/._* /etc/paths /etc/paths.d/*); do
-	PATH="$PATH:$pth"
+	[ "${pth:0:1}" != '#' ] && PATH="$PATH:$pth"
 done 2>/dev/null
 
 for pth in $(cat /etc/manpaths.d/._* /etc/manpaths /etc/manpaths.d/*); do
-	MANPATH="$MANPATH:$pth"
+	[ "${pth:0:1}" != '#' ] && MANPATH="$MANPATH:$pth"
 done 2>/dev/null
 : ${PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin}
 : ${MANPATH=/usr/share/man:/usr/local/share/man}
