@@ -75,7 +75,7 @@ _ret_prompt() {
 _ret_same() { return $?; }
 
 # Base functions ready. Let's load bashrc.d.
-for c in /etc/bashrc.d/*; do . $c; done 
+for script in /etc/bashrc.d/*; do . "$script"; done 
 
 # The prompt depends on vcs_status! Get one backup anyway.
 declare -f _vcs_status >/dev/null || ! echo _vcs_status not declared, making stub.. || alias _vcs_status=_ret_same
