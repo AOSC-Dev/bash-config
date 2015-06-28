@@ -4,8 +4,3 @@ PKGREL=0
 PKGDEP=bash
 PKGSEC=misc
 PKGDES="Generic Bash Startup Files for AOSC OS"
-
-# HACK: generate conffiles
-for i in `find . -type f | grep -E '(profile|bashrc|skel)'`; do
-    echo /etc/$i >> autobuild/conffiles
-done

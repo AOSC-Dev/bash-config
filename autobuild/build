@@ -3,3 +3,13 @@ install -Dm644 profile abdist/etc/profile
 cp -r bashrc.d abdist/etc/
 cp -r profile.d abdist/etc/
 cp -r skel abdist/etc/
+rm autobuild/conffiles
+
+# HACK: generate conffiles
+cd abdist
+IFS=$'\n'
+for i in $(find .); do
+    echo "${i/.\/}" >> autobuild/conffiles
+done
+IFS=$' \t\n'
+cd $SRCDIR
