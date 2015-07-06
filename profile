@@ -10,8 +10,8 @@
 # ~/.bash_profile.  Personal aliases and functions should go into
 # ~/.bashrc.
 
-
-export PATH MANPATH
+# Set up PATH and MANPATH
+unset PATH MANPATH
 _IFS=' 	
 ' # $' \t\n'
 IFS='
@@ -27,15 +27,16 @@ IFS="$_IFS"
 
 : ${PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin}
 : ${MANPATH=/usr/share/man:/usr/local/share/man}
+export PATH MANPATH
 
 # Setup some environment variables.
 export HISTFILESIZE=4096
 
 # Timezone variable $TZ, Wine and stuff alike need it.
-export TZ="$(readlink /etc/localtime | sed 's/^\.\.//g' | sed "s/\/usr\/share\/zoneinfo\///")"
+export TZ="$(readlink /etc/localtime | sed -e 's/^\.\.//g' -e 's@/usr/share/zoneinfo/@@')"
 
 for script in /etc/profile.d/* ; do
-	[ -r $script ] && . $script
+	[ -r $script ] && . "$script"
 done
 
 # Now to clean up
