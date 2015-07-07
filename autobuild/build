@@ -8,7 +8,7 @@ rm autobuild/conffiles
 # HACK: generate conffiles
 cd abdist
 IFS=$'\n'
-for i in $(find .); do
+for i in $(find . -type f); do
     echo "${i/.\/}" >> autobuild/conffiles
 done
 IFS=$' \t\n'

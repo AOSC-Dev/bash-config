@@ -30,18 +30,17 @@ alias __git_branch="git branch 2>/dev/null | grep '*' | sed 's/*\ //g'"
 
 # From http://mediadoneright.com/content/ultimate-git-ps1-bash-prompt
 # Modified.
-_git_branch() {
-  if git branch &>/dev/null
-  then if LANG=C git status | grep "nothing to commit" &>/dev/null
-      then printf "\e[1m@\e[0;32m$(__git_branch)\e[0m"
-      elif LANG=C git status | grep "nothing added to commit" &>/dev/null # Untracked
-        then printf "\e[1m@\e[0;35m$(__git_branch)\e[0m"
-      else printf "\e[1m@$IRED$(__git_branch)\e[0m" # Change not added/not merged yet
-    fi
-    else false # Necessary, read bashrc_repo.
-  fi
+_git_status() {
+	git branch &>/dev/null || return 1
+	if LANG=C git status | grep -q "nothing to commit"; then 
+		 printf "\e[1m@\e[0;32m$(__git_branch)\e[0m"
+	elif LANG=C git status | grep -q "nothing added to commit"; then # Untracked
+		 printf "\e[1m@\e[0;35m$(__git_branch)\e[0m"
+	else  # Change not added/not merged yet
+		 printf "\e[1m@$IRED$(__git_branch)\e[0m"
+	fi
 }
 
 
 # A shorter one without color
-# alias _git_branch="echo \" \$(__git_branch)\""
+# alias _git_status='_st="$(__git_branch)"; ((!PIPESTATUS[0])) && echo "@$_st"'

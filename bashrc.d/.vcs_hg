@@ -15,7 +15,7 @@ alias ha='hg add .'
 
 # From http://mediadoneright.com/content/ultimate-hg-ps1-bash-prompt
 # Modified for hg.
-_hg_branch() {
+_hg_status() {
   if hg branch &>/dev/null 
     then if LANG=C hg status | grep " " &>/dev/null
       then printf "\e[1m@\e[0;32m$(hg branch)\e[0m"
@@ -26,4 +26,4 @@ _hg_branch() {
 }
 
 # A shorter one without color
-# alias _hg_branch="echo \" \$(hg branch 2>/dev/null)\""
+# alias _hg_status='_st="$(hg branch)" && echo "@$st"'
