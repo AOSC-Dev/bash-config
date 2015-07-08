@@ -20,6 +20,7 @@ _is_posix(){ shopt -oq posix; }
 # Provides prompt for non-login shells, specifically shells started
 # in the X environment. 
 
+# TODO check case $- in (*i*)
 # Make bash append rather than overwrite the history on disk
 # Allows user to edit a failed hist exp.
 # Allows user to verify the results of hist exp.
@@ -40,6 +41,9 @@ shopt -s extglob globstar
 
 # Hashtable the commands!
 shopt -s checkhash
+
+# Winsize
+shopt -s checkwinsize
 
 # Colors
 alias l='ls -AFlh'
