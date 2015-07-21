@@ -17,7 +17,7 @@ alias ha='hg add .'
 # Modified for hg.
 _hg_status() {
   if hg branch &>/dev/null 
-    then if LANG=C hg status | grep " " &>/dev/null
+    then if LC_ALL=C hg status | grep " " &>/dev/null
       then printf "\e[1m@\e[0;32m$(hg branch)\e[0m"
       else printf "\e[1m@$IRED$(hg branch)\e[0m"
     fi
