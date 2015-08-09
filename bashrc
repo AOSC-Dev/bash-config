@@ -108,24 +108,6 @@ _is_posix || which(){ (alias; declare -F) | /usr/bin/which -i --read-functions "
 # Misc stuffs
 FIGNORE='~'
 TIMEFORMAT=$'\nreal\t%3lR\t%P%%\nuser\t%3lU\nsys\t%3lS'
-# Last directory recoding measure.
-_lastdir_go() {
-  if [ -s ~/.last_directory ]; then
-    if [ -d $(cat ~/.last_directory) ]; then
-      echo -e "$YELLOW>>>\t${CYAN}Returning you to the last directory...$NORMAL \`$(cat ~/.last_directory)'"
-      cd $(cat ~/.last_directory)
-    else
-      echo -e "$YELLOW>>>\t${CYAN}Last recorded directory cannot be accessed or was already removed.$NORMAL"
-    fi
-  fi
-}
-
-_lastdir_rec() {
-    local _ret=$? # Return value transparency is actually important here
-    echo -ne "$YELLOW>>>\t\033[36mRecording your current working directory...\033[0m"
-    pwd > ~/.last_directory
-    return $_ret
-}
 
 unset script shopt
 # End /etc/bashrc

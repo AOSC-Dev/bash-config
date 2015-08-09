@@ -23,7 +23,6 @@ Structure
   * Sets up the PS1
   * Sets up aliases
   * Sets up some bash-specific variables.
-  * Prepares the `_lastdir` functions for saving last directory on logout.
 * `profile` - Environment variables for all POSIX login shells
   * Sets up `$PATH` and `$MANPATH`:
     * Ignores lines starting with `#`.
@@ -36,9 +35,9 @@ Structure
   * Sets up `$TZ` and some common history variables.
   * Sources `profile.d`.
 * `skel` - `$HOME` Skeleton. Contains what we think is good for most users.
-  * `.bashrc` - User bash startup, sources `/etc/bashrc`, runs `_lastdir_go`.
+  * `.bashrc` - User bash startup, sources `/etc/bashrc`.
   * `.bash_profile` - User bash login, sources `~/.bashrc`.
-  * `.bash_logout` - User bash logout, runs `_lastdir_rec`.
+  * `.bash_logout` - User bash logout.
 * `bashrc.d` - Files sourced by `/etc/bashrc`.
   * `20-vcs` - VCS aliases and PS1. Provides `_vcs_status`.
     * `.vcs_*` - VCS Implementations.

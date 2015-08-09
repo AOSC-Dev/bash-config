@@ -13,6 +13,4 @@ if [ -f "/etc/bashrc" ] ; then
   source /etc/bashrc
 fi
 
-# Restores last directory state.
-_lastdir_go
 # End ~/.bashrc
