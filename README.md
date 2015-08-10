@@ -108,15 +108,15 @@ fi
 Porting
 -------
 
-
 The master branch of this repo can be easily ported to other platforms
-with bash and an echo with -e flag.
+with bash and an echo with -e flag. For earlier bash without `\e` escaping,
+perform `sed -i -e 's@\\e@\\33@g' **` on the tree.
 
-If you use BSD coreutils, just change `ls --color=auto` to `ls -G`.
+If you use BSD coreutils, change `ls --color=auto` to `ls -G`.
 
 If you use OS X or wants to make an OS X distribution, you had better include
 the workaround mentioned in
-[#3](https://github.com/AOSC-Dev/BASH_PS1_MISC/issues/3),
+[#3](https://github.com/AOSC-Dev/bash-config/issues/3),
 in order to avoid "Please install XCode Developer Tools"
 from appearing too many times.
 
