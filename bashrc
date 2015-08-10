@@ -53,25 +53,29 @@ for c in {e,f,}grep {v,}dir ls; do alias $c="$c --color=auto"; done;
 
 # So they can be unset.
 _aosc_bashrc_colors='NORMAL RED GREEN CYAN IRED YELLOW'
-NORMAL='\[\e[0m\]'
-RED='\[\e[1;31m\]'
-GREEN='\[\e[1;32m\]'
-CYAN='\[\e[1;36m\]'
+NORMAL=$'\1\e[0m\2'
+RED=$'\1\e[1;31m\2'
+GREEN=$'\1\e[1;32m\2'
+CYAN=$'\1\e[1;36m\2'
 
 # Linux tty color workaround
-[ "$(tput colors)" == 8 ] && YELLOW='\e[1;33m' IRED="\e[0;31m" || YELLOW='\e[1;93m' IRED="\e[0;91m"
+if [[ "$TERM" == linux ]]; then # && "$(tput colors)" == 8
+	YELLOW=$'\1\e[1;33m' IRED=$'\1\e[0;31m\2'
+else
+	YELLOW=$'\1\e[1;93m' IRED=$'\1\e[0;91m\2'
+fi
 
 # A simple error level reporting function.
 # Loaded back to PS1
 _ret_prompt() {
   case $? in
-    0|130) # Input C-c
-      ((EUID)) && printf '$' || printf '#' ;;
-    127) # Command not found
-      printf '\e[1;36m?'
+    0|130)	# Input C-c, we have to override the \$
+      ((EUID)) && echo -n '$' || echo -n '#';;
+    127)	# Command not found
+      echo -ne '\1\e[1;36m\2?'
       ;;
-    *)
-      printf $YELLOW'!'
+    *)		# Other errors
+      echo -ne '\1'$YELLOW'\2!'
       ;;
   esac
 }
