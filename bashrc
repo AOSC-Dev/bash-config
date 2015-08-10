@@ -112,6 +112,8 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias nano='nano -w'
 alias ed='ed -p: -v' # ED for Eununchs hackers.
+
+# A standard alias for which (debianutils vs GNU)
 _is_posix || which --version | grep GNU &>/dev/null && alias which='(alias; declare -f) | which -i --read-functions'
 
 # Misc stuffs
