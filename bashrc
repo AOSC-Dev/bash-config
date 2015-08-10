@@ -114,7 +114,7 @@ alias nano='nano -w'
 alias ed='ed -p: -v' # ED for Eununchs hackers.
 
 # A standard alias for which (debianutils vs GNU)
-_is_posix || which --version | grep GNU &>/dev/null && alias which='(alias; declare -f) | which -i --read-functions'
+_is_posix || which --version 2>/dev/null | grep -q GNU && alias which='(alias; declare -f) | which -i --read-functions'
 
 # Misc stuffs
 FIGNORE='~'
