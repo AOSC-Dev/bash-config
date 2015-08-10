@@ -33,14 +33,15 @@ alias __git_branch="git branch 2>/dev/null | grep '*' | sed 's/*\ //g'"
 _git_status() {
 	git branch &>/dev/null || return 1
 	if LC_ALL=C git status | grep -q "nothing to commit"; then 
-		 printf "\e[1m@\e[0;32m$(__git_branch)\e[0m"
+		 echo -e "\[\e[1m\]@\[\e[0;32m\]$(__git_branch)\[\e[0m\]"
 	elif LC_ALL=C git status | grep -q "nothing added to commit"; then # Untracked
-		 printf "\e[1m@\e[0;35m$(__git_branch)\e[0m"
+		 echo -e "\[\e[1m\]@\[\e[0;35m\]$(__git_branch)\[\e[0m\]"
 	else  # Change not added/not merged yet
-		 printf "\e[1m@$IRED$(__git_branch)\e[0m"
+		 echo -e "\[\e[1m\]@\[$IRED\]$(__git_branch)\[\e[0m\]"
 	fi
 }
 
-
 # A shorter one without color
 # alias _git_status='_st="$(__git_branch)"; ((!PIPESTATUS[0])) && echo "@$_st"'
+# For users of the contrib/completion __git_ps1
+# _git_status(){ git branch &>/dev/null || return 1; echo -n ' '; __git_ps1; }

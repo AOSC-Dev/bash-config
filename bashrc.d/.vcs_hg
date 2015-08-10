@@ -13,16 +13,15 @@ alias hb='hg branch'
 alias hs='hg status'
 alias ha='hg add .'
 
-# From http://mediadoneright.com/content/ultimate-hg-ps1-bash-prompt
+# From http://mediadoneright.com/content/ultimate-git-ps1-bash-prompt
 # Modified for hg.
 _hg_status() {
-  if hg branch &>/dev/null 
-    then if LC_ALL=C hg status | grep " " &>/dev/null
-      then printf "\e[1m@\e[0;32m$(hg branch)\e[0m"
-      else printf "\e[1m@$IRED$(hg branch)\e[0m"
-    fi
-    else false
-  fi
+	hg branch &>/dev/null || return 1
+	if LC_ALL=C hg status | grep -q ' '; then
+		echo -ne "@\[\e[1m\]\[\e[0;32m\]$(hg branch)\[\e[0m\]"
+	else
+		echo -ne "@\[\e[1m\]\[$IRED\]$(hg branch)\[\e[0m\]"
+	fi
 }
 
 # A shorter one without color

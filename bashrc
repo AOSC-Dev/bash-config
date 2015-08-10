@@ -52,18 +52,24 @@ alias la='ls -AF'
 for c in {e,f,}grep {v,}dir ls; do alias $c="$c --color=auto"; done;
 
 # So they can be unset.
+# I need someone to help me assign those names properly.
+# Those are actually bold colors.
 _aosc_bashrc_colors='NORMAL RED GREEN CYAN IRED YELLOW'
-NORMAL=$'\\[\e[0m\\]'
-RED=$'\\[\e[1;31m\\]'
-GREEN=$'\\[\e[1;32m\\]'
-CYAN=$'\\[\e[1;36m\\]'
+NORMAL='\e[0m'
+RED='\e[1;31m'
+GREEN='\e[1;32m'
+CYAN='\e[1;36m'
+YELLOW='\e[1;93m'
+IRED='\e[0;91m'
 
-# Linux tty color workaround
-if [[ "$TERM" == linux ]]; then # && "$(tput colors)" == 8
-	YELLOW=$'\\[\e[1;33m' IRED=$'\\[\e[0;31m\\]'
+if _rc_term_colors="$(tput colors &>/dev/null)"; then
+	[ "$colors" -le 16 ]
 else
-	YELLOW=$'\\[\e[1;93m' IRED=$'\\[\e[0;91m\\]'
-fi
+	case "$TERM" in (linux|msys|cygwin) true;; (*) false;; esac
+fi && YELLOW='\e[1;33m' IRED='\e[0;31m'
+unset _rc_term_colors
+
+# if our TERM has no color support, then unset $_aosc_bashrc_colors
 
 # A simple error level reporting function.
 # Loaded back to PS1
@@ -95,9 +101,9 @@ type _vcs_status &>/dev/null || ! echo _vcs_status not declared, making stub.. |
 # Well, forget it.
 
 if [[ "$EUID" == 0 ]] ; then
-  PS1="$RED\u $NORMAL[ \W\$(_vcs_status) ]$RED \$(_ret_prompt) $NORMAL"
+  PS1="\[$RED\]\u \[$NORMAL\][ \W\$(_vcs_status) ]\[$RED\] \$(_ret_prompt) \[$NORMAL\]"
 else
-  PS1="$GREEN\u $NORMAL[ \W\$(_vcs_status) ]$GREEN \$(_ret_prompt) $NORMAL"
+  PS1="\[$GREEN\]\u \[$NORMAL\][ \W\$(_vcs_status) ]\[$GREEN\] \$(_ret_prompt) \[$NORMAL\]"
 fi
 
 
@@ -110,7 +116,7 @@ _is_posix || which --version | grep GNU &>/dev/null && alias which='(alias; decl
 
 # Misc stuffs
 FIGNORE='~'
-TIMEFORMAT=$'\nreal\t%3lR\t%P%%\nuser\t%3lU\nsys\t%3lS'
+TIMEFORMAT='\nreal\t%3lR\t%P%%\nuser\t%3lU\nsys\t%3lS'
 
 unset script shopt
 # End /etc/bashrc
