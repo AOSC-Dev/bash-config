@@ -86,7 +86,7 @@ _ret_same() { return $?; }
 for script in /etc/bashrc.d/*; do . "$script"; done 
 
 # The prompt depends on vcs_status! Get one backup anyway.
-declare -f _vcs_status >/dev/null || ! echo _vcs_status not declared, making stub.. || alias _vcs_status=_ret_same
+type _vcs_status &>/dev/null || ! echo _vcs_status not declared, making stub.. || alias _vcs_status=_ret_same
 
 # To be shipped together. See comments in bashrc_repo on _ret and _ret_status().
 
@@ -102,12 +102,11 @@ fi
 
 
 # Extra Aliases for those lazy ones :)
-alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias nano='nano -w'
 alias ed='ed -p: -v' # ED for Eununchs hackers.
-_is_posix || which(){ (alias; declare -F) | /usr/bin/which -i --read-functions "$@"; }
+_is_posix || which --version | grep GNU &>/dev/null && alias which='(alias; declare -f) | which -i --read-functions'
 
 # Misc stuffs
 FIGNORE='~'
