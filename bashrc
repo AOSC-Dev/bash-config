@@ -62,7 +62,7 @@ CYAN='\e[1;36m'
 YELLOW='\e[1;93m'
 IRED='\e[0;91m'
 
-if _rc_term_colors="$(tput colors &>/dev/null)"; then
+if _rc_term_colors="$(tput colors)"; then
 	[ "$_rc_term_colors" -le 16 ]
 else
 	case "$TERM" in (linux|msys|cygwin) true;; (*) false;; esac
