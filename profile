@@ -10,6 +10,9 @@
 # ~/.bash_profile.  Personal aliases and functions should go into
 # ~/.bashrc.
 
+# Enable extglob for exclusion synatxes
+shopt -s extglob
+
 # Set up PATH and MANPATH
 unset PATH MANPATH
 _IFS=' 	
@@ -35,7 +38,8 @@ export HISTFILESIZE=4096
 # Timezone variable $TZ, Wine and stuff alike need it.
 export TZ="$(readlink /etc/localtime | sed -e 's/^\.\.//g' -e 's@/usr/share/zoneinfo/@@')"
 
-for script in /etc/profile.d/* ; do
+# Source profile scripts, excluding csh scripts
+for script in /etc/profile.d/!(*.csh) ; do
 	[ -r $script ] && . "$script"
 done
 
