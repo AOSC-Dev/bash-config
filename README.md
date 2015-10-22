@@ -131,8 +131,11 @@ some people like @Icenowy keeps annoying me with those.
 
 ### Why did I get a command `lastdir` not found error on logout?
 
-Because including it was a mistake. Replace corresponding file(s) with those
-in `/etc/skel`, so just run `cat /etc/skel/.bash_logout > ~/.bash_logout`.
+Because including that feature was a mistake, and we fixed it. You will need
+to replace corresponding file(s) with those in `/etc/skel`, so just run
+`cat /etc/skel/.bash_logout > ~/.bash_logout`.
+
+If you have made extra changes to that file, merge them by yourself.
 
 ### Why are you breaking things?
 
