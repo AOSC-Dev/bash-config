@@ -10,9 +10,6 @@
 # ~/.bash_profile.  Personal aliases and functions should go into
 # ~/.bashrc.
 
-# Enable extglob for exclusion synatxes
-shopt -s extglob
-
 # Set up PATH and MANPATH
 unset PATH MANPATH
 _IFS=' 	
@@ -20,11 +17,13 @@ _IFS='
 IFS='
 ' # $'\n'
 for pth in $(cat /etc/paths.d/._* /etc/paths /etc/paths.d/*); do
-	[ "${pth:0:1}" != '#' ] && PATH="$PATH:$pth"
+	case "$pth" in \#*) continue;; esac
+	PATH="$PATH:$pth"
 done 2>/dev/null
 
 for pth in $(cat /etc/manpaths.d/._* /etc/manpaths /etc/manpaths.d/*); do
-	[ "${pth:0:1}" != '#' ] && MANPATH="$MANPATH:$pth"
+	case "$pth" in \#*) continue;; esac
+	MANPATH="$MANPATH:$pth"
 done 2>/dev/null
 IFS="$_IFS"
 
@@ -38,9 +37,11 @@ export HISTFILESIZE=4096
 # Timezone variable $TZ, Wine and stuff alike need it.
 export TZ="$(readlink /etc/localtime | sed -e 's/^\.\.//g' -e 's@/usr/share/zoneinfo/@@')"
 
-# Source profile scripts, excluding csh scripts
-for script in /etc/profile.d/!(*.csh) ; do
-	[ -r $script ] && . "$script"
+# Source profile scripts
+for script in /etc/profile.d/* ; do
+	# No! Go away, csh!
+	case "$script" in *.csh) continue;; esac
+	[ -r "$script" ] && . "$script"
 done
 
 # Now to clean up
