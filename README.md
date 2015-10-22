@@ -1,7 +1,9 @@
 bash-config
 ===========
 
-AOSC's bash & sh startup files in `/etc`.
+AOSC's bash & sh startup files in `/etc`. This is meant to be a minimal
+one with *some* features, and if you really want a cool one, consult things
+like bashstyle-ng.
 
 Features
 --------
