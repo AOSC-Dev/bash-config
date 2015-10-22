@@ -122,3 +122,23 @@ from appearing too many times.
 
 This package provides an example:
 [Bash 4.3 for OS X](http://pan.baidu.com/s/1c0xlkFu).
+
+F@Q
+---
+
+Those are questions collected over time. I got tired answering this, although
+some people like @Icenowy keeps annoying me with those.
+
+### Why did I get a command `lastdir` not found error on logout?
+
+Because including it was a mistake. Replace corresponding file(s) with those
+in `/etc/skel`, so just run `cat /etc/skel/.bash_logout > ~/.bash_logout`.
+
+### Why are you breaking things?
+
+Because AOSC OS itself is beta. Luckily, although it comes with no warrenty,
+documented things will not be changed frequently. Data loss should be super
+rare, or *epic*, too. Even us use it on production environment.
+
+If those things happens to you, we can buy you some lolipop. You can also open
+_Love Live_ and perform a 11-time recruit.
