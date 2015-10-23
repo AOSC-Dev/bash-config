@@ -143,7 +143,7 @@ If you have made extra changes to that file, merge them by yourself.
 
 Because AOSC OS itself is beta. Luckily, although it comes with no warrenty,
 documented things will not be changed frequently. Data loss should be super
-rare, or *epic*, too. Even us use it on production environment.
+rare, or *epic*, too. Even ourselves use it on production environment.
 
 If those things happens to you, we can buy you some lolipop. You can also open
 _Love Live_ and perform a 11-time recruit.
