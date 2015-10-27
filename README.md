@@ -83,11 +83,11 @@ if _is_interactive; then
       load_if_exists ~/.profile
     fi
   elif ! _bash_opts --norc; then
-	if ! _is_posix; then
-		_is_sh || load_if_exists "$(_bash_optarg --rcfile || echo ~/.bashrc)"
-	else
-		load_if_exists "$ENV"
-	fi
+    if ! _is_posix; then
+      _is_sh || load_if_exists "$(_bash_optarg --rcfile || echo ~/.bashrc)"
+    else
+      load_if_exists "$ENV"
+    fi
   elif _is_network_input; then
     is_sh || load_if_exists ~/.bashrc
   fi
