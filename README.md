@@ -65,11 +65,11 @@ On Startup:
 ```Bash
 # Pseudo-code functions:
 # _bash_optarg: The argument for an option.
-# _bash_opts: If this option is set.
+# _bash_opts: If this option is set: [[ $- == *$1* ]].
 _is_sh(){ [ "$(basename "$BASH")" == "sh" ]; }
 _is_posix(){ shopt -oq posix; }
 _is_interactive() { case "$-" in *i*) return 0; esac; return 1; }
-_is_login(){ [ "${0:0:1}" == - ] || _bash_opts --login || _bash_opts -l; }
+_is_login(){ [ "${0:0:1}" == - ] || _bash_opts -l; }
 # Real bash doesn't change the return value, just for convenience with ||
 load_if_exists(){ [ -r "$1" ] || return 1; . "$@"; true; }
 if _is_interactive; then
