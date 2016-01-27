@@ -118,7 +118,7 @@ _is_posix || which --version 2>/dev/null | grep -q GNU && alias which='(alias; d
 
 # Misc stuffs
 FIGNORE='~'
-TIMEFORMAT='\nreal\t%3lR\t%P%%\nuser\t%3lU\nsys\t%3lS'
+TIMEFORMAT=$'\nreal\t%3lR\t%P%%\nuser\t%3lU\nsys\t%3lS'
 
 unset script shopt
 # End /etc/bashrc
