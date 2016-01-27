@@ -1,6 +1,6 @@
 PKGNAME=bash-startup
-PKGVER=2.1really0.4.1.1
-PKGREL=0
+PKGVER=0.4.2.3
+PKGEPOCH=1
 PKGDEP=bash
 PKGSEC=misc
 PKGDES="Generic Bash Startup Files for AOSC OS"
