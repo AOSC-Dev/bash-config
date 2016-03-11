@@ -1,8 +1,7 @@
 # Set locale for legacy desktop environments that do not respect localectl.
 # TODO: export and fallback all the stuffs as defined in locale.conf(7).
 [ -f /etc/locale.conf ] && . /etc/locale.conf
-: ${LC_ALL=${LANG=C}}
-export LANG LC_ALL
+export LANG
 if test -z "${XDG_RUNTIME_DIR}"; then
     export XDG_RUNTIME_DIR=/tmp/${UID}-runtime-dir
     if ! test -d "${XDG_RUNTIME_DIR}"; then
