@@ -101,9 +101,9 @@ type _vcs_status &>/dev/null || ! echo _vcs_status not declared, making stub.. |
 # Well, forget it.
 
 if [[ "$EUID" == 0 ]] ; then
-  PS1="\[$RED\]\u \[$NORMAL\][ \W\$(_vcs_status) ]\[$RED\] \$(_ret_prompt) \[$NORMAL\]"
+  PS1="\[$RED\]\u@\h \[$NORMAL\][ \W\$(_vcs_status) ]\[$RED\] \$(_ret_prompt) \[$NORMAL\]"
 else
-  PS1="\[$GREEN\]\u \[$NORMAL\][ \W\$(_vcs_status) ]\[$GREEN\] \$(_ret_prompt) \[$NORMAL\]"
+  PS1="\[$GREEN\]\u@\h \[$NORMAL\][ \W\$(_vcs_status) ]\[$GREEN\] \$(_ret_prompt) \[$NORMAL\]"
 fi
 
 
