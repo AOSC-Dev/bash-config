@@ -54,8 +54,9 @@ for c in {e,f,}grep {v,}dir ls; do alias $c="$c --color=auto"; done;
 # So they can be unset.
 # I need someone to help me assign those names properly.
 # Those are actually bold colors.
-_aosc_bashrc_colors='NORMAL RED GREEN CYAN IRED YELLOW'
+_aosc_bashrc_colors='NORMAL BOLD RED GREEN CYAN IRED YELLOW'
 NORMAL='\e[0m'
+BOLD='\e[1;37m'
 RED='\e[1;31m'
 GREEN='\e[1;32m'
 CYAN='\e[1;36m'
@@ -101,9 +102,9 @@ type _vcs_status &>/dev/null || ! echo _vcs_status not declared, making stub.. |
 # Well, forget it.
 
 if [[ "$EUID" == 0 ]] ; then
-  PS1="\[$RED\]\u@\h \[$NORMAL\][ \W\$(_vcs_status) ]\[$RED\] \$(_ret_prompt) \[$NORMAL\]"
+  PS1="\[$RED\]\u\[$BOLD\]@\[$NORMAL\]\h [ \W\$(_vcs_status) ]\[$RED\] \$(_ret_prompt) \[$NORMAL\]"
 else
-  PS1="\[$GREEN\]\u@\h \[$NORMAL\][ \W\$(_vcs_status) ]\[$GREEN\] \$(_ret_prompt) \[$NORMAL\]"
+  PS1="\[$GREEN\]\u\[$BOLD\]@\[$NORMAL\]\h [ \W\$(_vcs_status) ]\[$GREEN\] \$(_ret_prompt) \[$NORMAL\]"
 fi
 
 
