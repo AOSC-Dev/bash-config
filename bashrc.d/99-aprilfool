@@ -1,0 +1,13 @@
+# 99-April Fool
+# By Staph. aureus
+# Install a run-once Easter Egg into /tmp in 2017-04-01
+
+if [ $(date +%F) == "2017-04-01" ]; then
+	if [ ! -f /tmp/scat ] ; then
+		echo \#! /bin/bash >/tmp/scat
+		echo "while IFS= read -rn1 a; do printf %s \"\${a:-\$'\n'}\"; sleep \$1; done" >> /tmp/scat
+		echo sleep \$2 >> /tmp/scat
+		chmod +x /tmp/scat
+		echo Welcome to the summoner\'s rift. | /tmp/scat 0.1 0
+	fi
+fi
