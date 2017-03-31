@@ -8,6 +8,20 @@ if [ $(date +%F) == "2017-04-01" ]; then
 		echo "while IFS= read -rn1 a; do printf %s \"\${a:-\$'\n'}\"; sleep \$1; done" >> /tmp/scat
 		echo sleep \$2 >> /tmp/scat
 		chmod +x /tmp/scat
-		echo Welcome to the summoner\'s rift. | /tmp/scat 0.1 0
+		echo " calc:" | /tmp/scat 0.1 0.1
+		echo "   sub ebx, eax" | /tmp/scat 0.1 0.4
+		echo "    jz retv" | /tmp/scat 0.1 0.1
+		echo "    jg calc" | /tmp/scat 0.1 0.1
+		echo "  xchg ebx, eax" | /tmp/scat 0.1 0.4
+		echo "   jmp calc" | /tmp/scat 0.1 0.1
+		echo " retv:" | /tmp/scat 0.1 0.1
+		echo "  ret" | /tmp/scat 0.1 2
+		echo
+		echo "Welcome back, $USER" | /tmp/scat 0.1 0.1
+		echo
+		echo "Major updates are going on with AOSC."
+		echo "Please check the news website (https://aosc.io)"
+		echo "and carefully read all the changes happening now..."
+		sleep 1
 	fi
 fi
