@@ -27,7 +27,7 @@ for pth in $(cat /etc/manpaths.d/._* /etc/manpaths /etc/manpaths.d/*); do
 done 2>/dev/null
 IFS="$_IFS"
 
-: ${PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin}
+: ${PATH=/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin}
 : ${MANPATH=/usr/share/man:/usr/local/share/man}
 export PATH MANPATH
 
