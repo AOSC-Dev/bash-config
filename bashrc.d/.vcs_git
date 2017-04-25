@@ -32,13 +32,15 @@ alias __git_branch="git branch 2>/dev/null | grep '*' | sed 's/*\ //g'"
 # From http://mediadoneright.com/content/ultimate-git-ps1-bash-prompt
 # Modified.
 _git_status() {
-	git branch &>/dev/null || return 1
-	if LC_ALL=C git status | grep -q "nothing to commit"; then 
-		 echo -e "\01\e[1m\02@\01\e[0;32m\0002$(__git_branch)\01\e[0m\02"
-	elif LC_ALL=C git status | grep -q "nothing added to commit"; then # Untracked
-		 echo -e "\01\e[1m\02@\01\e[0;35m\0002$(__git_branch)\01\e[0m\02"
+	local gbr=$(git branch 2>/dev/null) || return 1
+	gbr=$(printf %s "$gbr" | grep '*' | sed 's/*\ //g')
+	local gst=$(LC_ALL=C git status)
+	if printf %s "$gst" | grep -q "nothing to commit"; then 
+		 echo -e "\01\e[1m\02@\01\e[0;32m\0002$gbr\01\e[0m\02"
+	elif printf %s "$gst" || grep -q "nothing added to commit"; then # Untracked
+		 echo -e "\01\e[1m\02@\01\e[0;35m\0002$gbr\01\e[0m\02"
 	else  # Change not added/not merged yet
-		 echo -e "\01\e[1m\02@\01$IRED\0002$(__git_branch)\01\e[0m\02"
+		 echo -e "\01\e[1m\02@\01$IRED\0002$gbr\01\e[0m\02"
 	fi
 }
 
