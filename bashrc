@@ -111,7 +111,7 @@ fi
 # Extra Aliases for those lazy ones :)
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias nano='nano -w'
+alias nano='nano -w -u'
 alias ed='ed -p: -v' # ED for Eununchs hackers.
 
 # A standard alias for which (debianutils vs GNU)
