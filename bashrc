@@ -49,7 +49,10 @@ shopt -s checkwinsize
 alias l='ls -AFlh'
 alias ll='ls -Flh'
 alias la='ls -AF'
-for c in {e,f,}grep {v,}dir ls; do alias $c="$c --color=auto"; done;
+for c in {e,f,}grep {v,}dir ls; do alias $c="$c --color=auto"; done
+
+# space and time efficient cp
+alias cp='cp --reflink=auto --sparse=always'
 
 # So they can be unset.
 # I need someone to help me assign those names properly.
