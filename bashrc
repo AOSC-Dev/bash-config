@@ -54,6 +54,10 @@ for c in {e,f,}grep {v,}dir ls; do alias $c="$c --color=auto"; done
 # space and time efficient cp
 alias cp='cp --reflink=auto --sparse=always'
 
+# History Search
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+
 # So they can be unset.
 # I need someone to help me assign those names properly.
 # Those are actually bold colors.
