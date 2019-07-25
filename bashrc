@@ -18,7 +18,7 @@ _is_posix(){ shopt -oq posix; }
 . /etc/profile
 
 # Provides prompt for non-login shells, specifically shells started
-# in the X environment. 
+# in the X environment.
 
 # TODO check case $- in (*i*)
 # Make bash append rather than overwrite the history on disk
@@ -34,7 +34,7 @@ HISTCONTROL='ignorespace'
 shopt -s cdspell autocd cdable_vars
 
 # Do not complete when readline buf is empty
-shopt -s no_empty_cmd_completion 
+shopt -s no_empty_cmd_completion
 
 # Extended glob (3.5.8.1) & find-all-glob with **
 shopt -s extglob globstar
@@ -53,10 +53,6 @@ for c in {e,f,}grep {v,}dir ls; do alias $c="$c --color=auto"; done
 
 # space and time efficient cp
 alias cp='cp --reflink=auto --sparse=always'
-
-# History Search
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
 
 # So they can be unset.
 # I need someone to help me assign those names properly.
@@ -97,7 +93,7 @@ _ret_prompt() {
 _ret_same() { return $?; }
 
 # Base functions ready. Let's load bashrc.d.
-for script in /etc/bashrc.d/*; do . "$script"; done 
+for script in /etc/bashrc.d/*; do . "$script"; done
 
 # The prompt depends on vcs_status! Get one backup anyway.
 type _vcs_status &>/dev/null || ! echo _vcs_status not declared, making stub.. || alias _vcs_status=_ret_same
