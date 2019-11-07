@@ -22,9 +22,12 @@ append () {
   export PATH="$NEWPATH:$1"
 }
 
+# Set GCC_COLORS to something to trigger the tty-dependent auto coloring.
+# Using a dummy value so we are not overriding the defaults.
+export GCC_COLORS="${GCC_COLORS:-aosc-dummy=01}"
+
 if [ -f "$HOME/.bashrc" ] ; then
   source $HOME/.bashrc
 fi
-
 
 # End ~/.bash_profile
