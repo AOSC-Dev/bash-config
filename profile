@@ -16,12 +16,12 @@ _IFS='
 ' # $' \t\n'
 IFS='
 ' # $'\n'
-for pth in $(cat /etc/paths.d/._* /etc/paths /etc/paths.d/*); do
+for pth in $(cat /etc/paths.d/!(*.dpkg*) /etc/paths); do
 	case "$pth" in \#*) continue;; esac
 	PATH="$PATH:$pth"
 done 2>/dev/null
 
-for pth in $(cat /etc/manpaths.d/._* /etc/manpaths /etc/manpaths.d/*); do
+for pth in $(cat /etc/manpaths.d/!(*.dpkg*) /etc/manpaths); do
 	case "$pth" in \#*) continue;; esac
 	MANPATH="$MANPATH:$pth"
 done 2>/dev/null
@@ -38,7 +38,7 @@ export HISTFILESIZE=4096
 export TZ="$(readlink /etc/localtime | sed -e 's/^\.\.//g' -e 's@/usr/share/zoneinfo/@@')"
 
 # Source profile scripts
-for script in /etc/profile.d/* ; do
+for script in /etc/profile.d/!(*.dpkg*) ; do
 	case "$script" in
 		*.csh)  # No! Go away, csh!
 			continue;;
