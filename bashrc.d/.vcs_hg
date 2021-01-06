@@ -15,7 +15,7 @@ alias ha='hg add .'
 
 # From http://mediadoneright.com/content/ultimate-git-ps1-bash-prompt
 # Modified for hg.
-_hg_status() {
+_ps1_hg_status() {
 	hg branch &>/dev/null || return 1
 	if LC_ALL=C hg status | grep -q ' '; then
 		echo -ne "@\01\e[1m\]\01\e[0;32m\]$(hg branch)\01\e[0m\]"
