@@ -10,6 +10,24 @@
 [ "$BASH" ] || shopt(){ return ${shopt_def-0}; }
 _is_posix(){ shopt -oq posix; }
 
+# System wide environment variables and startup programs should go into
+# /etc/profile.  Personal environment variables and startup programs
+# should go into ~/.bash_profile.  Personal aliases and functions should
+# go into ~/.bashrc
+
+. /etc/profile
+
+# Provides prompt for non-login shells, specifically shells started
+# in the X environment.
+
+# TODO check case $- in (*i*)
+# Make bash append rather than overwrite the history on disk
+# Allows user to edit a failed hist exp.
+# Allows user to verify the results of hist exp.
+shopt -s histappend histreedit histverify
+HISTIGNORE='&:[bf]g:exit'
+HISTCONTROL='ignorespace'
+
 # When changing directory small typos can be ignored by bash
 # Chdirs into it if command is a dir
 # Chdirs into $var if var not found
@@ -26,24 +44,6 @@ shopt -s checkhash
 
 # Winsize
 shopt -s checkwinsize
-
-# Provides prompt for non-login shells, specifically shells started
-# in the X environment.
-
-# TODO check case $- in (*i*)
-# Make bash append rather than overwrite the history on disk
-# Allows user to edit a failed hist exp.
-# Allows user to verify the results of hist exp.
-shopt -s histappend histreedit histverify
-HISTIGNORE='&:[bf]g:exit'
-HISTCONTROL='ignorespace'
-
-# System wide environment variables and startup programs should go into
-# /etc/profile.  Personal environment variables and startup programs
-# should go into ~/.bash_profile.  Personal aliases and functions should
-# go into ~/.bashrc
-
-. /etc/profile
 
 # Colors
 alias l='ls -AFlh'
