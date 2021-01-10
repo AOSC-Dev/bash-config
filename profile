@@ -40,12 +40,11 @@ export TZ="$(readlink /etc/localtime | sed -e 's/^\.\.//g' -e 's@/usr/share/zone
 # Source profile scripts
 for script in /etc/profile.d/* ; do
 	case "$script" in
-		*.csh)  # No! Go away, csh!
-			continue;;
 		*.bash)
-			[ "$BASH" ] || continue;;
+			bash "$script" ;;
+		*.sh)
+			. "$script" ;;
 	esac
-	[ -r "$script" ] && . "$script"
 done
 
 # Now to clean up
