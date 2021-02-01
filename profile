@@ -41,7 +41,7 @@ export TZ="$(readlink /etc/localtime | sed -e 's/^\.\.//g' -e 's@/usr/share/zone
 for script in /etc/profile.d/* ; do
 	case "$script" in
 		*.bash)
-			bash "$script" ;;
+			[ "$BASH" ] && . "$script" ;;
 		*.sh)
 			. "$script" ;;
 	esac
