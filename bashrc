@@ -15,8 +15,6 @@ _is_posix(){ shopt -oq posix; }
 # should go into ~/.bash_profile.  Personal aliases and functions should
 # go into ~/.bashrc
 
-. /etc/profile
-
 # Provides prompt for non-login shells, specifically shells started
 # in the X environment.
 
