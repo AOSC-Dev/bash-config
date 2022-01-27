@@ -96,7 +96,8 @@ _ret_same() { return $?; }
 for script in /etc/bashrc.d/*; do . "$script"; done
 
 # The prompt depends on vcs_status! Get one backup anyway.
-type _vcs_status &>/dev/null || ! echo _vcs_status not declared, making stub.. || alias _vcs_status=_ret_same
+type _vcs_status &>/dev/null || \
+    alias _vcs_status=_ret_same
 
 # To be shipped together. See comments in bashrc_repo on _ret and _ret_status().
 
