@@ -18,30 +18,32 @@ _is_posix(){ shopt -oq posix; }
 # Provides prompt for non-login shells, specifically shells started
 # in the X environment.
 
-# TODO check case $- in (*i*)
-# Make bash append rather than overwrite the history on disk
-# Allows user to edit a failed hist exp.
-# Allows user to verify the results of hist exp.
-shopt -s histappend histreedit histverify
+# Setting shell options:
+#
+# - Make bash append rather than overwrite the history on disk.
+# - Allows user to edit a failed hist exp.
+# - Allows user to verify the results of hist exp.
+# - When changing directory small typos can be ignored by bash.
+# - Chdirs into it if command is a dir.
+# - Chdirs into $var if var not found.
+# - Do not complete when readline buf is empty.
+# - Extended glob (3.5.8.1) & find-all-glob with **.
+# - Hashtable the commands!
+# - Winsize.
+shopt -s \
+    histappend \
+    histreedit \
+    histverify \
+    cdspell \
+    autocd \
+    cdable_vars \
+    no_empty_cmd_completion \
+    extglob \
+    globstar \
+    checkhash \
+    checkwinsize
 HISTIGNORE='&:[bf]g:exit'
 HISTCONTROL='ignorespace'
-
-# When changing directory small typos can be ignored by bash
-# Chdirs into it if command is a dir
-# Chdirs into $var if var not found
-shopt -s cdspell autocd cdable_vars
-
-# Do not complete when readline buf is empty
-shopt -s no_empty_cmd_completion
-
-# Extended glob (3.5.8.1) & find-all-glob with **
-shopt -s extglob globstar
-
-# Hashtable the commands!
-shopt -s checkhash
-
-# Winsize
-shopt -s checkwinsize
 
 # Colors
 alias l='ls -AFlh'
