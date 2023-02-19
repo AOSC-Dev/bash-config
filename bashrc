@@ -93,6 +93,12 @@ _ret_prompt() {
 
 _ret_same() { return $?; }
 
+_ssh_session() {
+	if [ -n "$SSH_CLIENT" ]; then
+		echo 'ssh:'
+	fi
+}
+
 # Base functions ready. Let's load bashrc.d.
 for script in /etc/bashrc.d/*; do . "$script"; done
 
