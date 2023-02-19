@@ -3,8 +3,8 @@
 # by James Robertson <jameswrobertson@earthlink.net>
 # updated by Bruce Dubbs <bdubbs@linuxfromscratch.org>
 
-# Then improved and changed to fit AOSC OSes
-# By Jeff Bai and Arthur Wang
+# Then improved and changed to fit AOSC OS.
+# By Mingcong Bai and Arthur Wang.
 
 # System wide aliases and functions.
 [ "$BASH" ] || shopt(){ return ${shopt_def-0}; }
