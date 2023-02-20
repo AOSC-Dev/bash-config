@@ -94,7 +94,7 @@ _ret_prompt() {
 _ret_same() { return $?; }
 
 _ssh_session() {
-	if [ -n "$SSH_CLIENT" ]; then
+	if [[ $(pstree -s $$) = *sshd* ]]; then
 		echo 'ssh:'
 	fi
 }
