@@ -113,9 +113,9 @@ type _vcs_status &>/dev/null || \
 # Well, forget it.
 
 if [[ "$EUID" == 0 ]] ; then
-  PS1="$BTEAL\$(_ssh_session)$NORMAL\[$RED\]\u\[$BOLD\]@\[$NORMAL\]\h [ \W\$(_vcs_status) ]\[$RED\] \$(_ret_prompt) \[$NORMAL\]"
+  PS1="\[$BTEAL\]\$(_ssh_session)\[$NORMAL\]\[$RED\]\u\[$BOLD\]@\[$NORMAL\]\h [ \W\$(_vcs_status) ]\[$RED\] \$(_ret_prompt) \[$NORMAL\]"
 else
-  PS1="$BTEAL\$(_ssh_session)$NORMAL\[$GREEN\]\u\[$BOLD\]@\[$NORMAL\]\h [ \W\$(_vcs_status) ]\[$GREEN\] \$(_ret_prompt) \[$NORMAL\]"
+  PS1="\[$BTEAL\]\$(_ssh_session)\[$NORMAL\]\[$GREEN\]\u\[$BOLD\]@\[$NORMAL\]\h [ \W\$(_vcs_status) ]\[$GREEN\] \$(_ret_prompt) \[$NORMAL\]"
 fi
 
 
