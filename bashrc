@@ -67,7 +67,6 @@ GREEN='\e[1;32m'
 CYAN='\e[1;36m'
 YELLOW='\e[1;93m'
 IRED='\e[0;91m'
-BTEAL='\e[48;5;14m'
 
 if _rc_term_colors="$(tput colors)"; then
 	[ "$_rc_term_colors" -le 16 ]
@@ -121,9 +120,9 @@ type _vcs_status &>/dev/null || \
 # Well, forget it.
 
 if [[ "$EUID" == 0 ]] ; then
-  PS1="\[$BTEAL\]\$(_ssh_session)\[$NORMAL\]\[$RED\]\u\[$BOLD\]@\[$NORMAL\]\h [ \W\$(_vcs_status) ]\[$RED\] \$(_ret_prompt) \[$NORMAL\]"
+  PS1="\[$YELLOW\]\$(_ssh_session)\[$NORMAL\]\[$RED\]\u\[$BOLD\]@\[$NORMAL\]\h [ \W\$(_vcs_status) ]\[$RED\] \$(_ret_prompt) \[$NORMAL\]"
 else
-  PS1="\[$BTEAL\]\$(_ssh_session)\[$NORMAL\]\[$GREEN\]\u\[$BOLD\]@\[$NORMAL\]\h [ \W\$(_vcs_status) ]\[$GREEN\] \$(_ret_prompt) \[$NORMAL\]"
+  PS1="\[$YELLOW\]\$(_ssh_session)\[$NORMAL\]\[$GREEN\]\u\[$BOLD\]@\[$NORMAL\]\h [ \W\$(_vcs_status) ]\[$GREEN\] \$(_ret_prompt) \[$NORMAL\]"
 fi
 
 
