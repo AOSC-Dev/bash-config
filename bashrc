@@ -96,9 +96,15 @@ _ret_prompt() {
 _ret_same() { return $?; }
 
 _ssh_session() {
+	# Store error code.
+	err="$?"
+	# This if branch would overwrite the current error code.
 	if [[ $(pstree -s $$) = *sshd* ]]; then
 		echo 'ssh:'
 	fi
+	# Load error code.
+	return "$err"
+	unset err
 }
 
 # Base functions ready. Let's load bashrc.d.
