@@ -100,7 +100,7 @@ _ssh_session() {
 	err="$?"
 	# This if branch would overwrite the current error code.
 	if [[ $(pstree -s $$) = *sshd* ]]; then
-		echo 'ssh:'
+		echo '(ssh)'
 	fi
 	# Load error code.
 	return "$err"
