@@ -25,7 +25,6 @@ _is_posix(){ shopt -oq posix; }
 # - Allows user to verify the results of hist exp.
 # - When changing directory small typos can be ignored by bash.
 # - Chdirs into it if command is a dir.
-# - Chdirs into $var if var not found.
 # - Do not complete when readline buf is empty.
 # - Extended glob (3.5.8.1) & find-all-glob with **.
 # - Hashtable the commands!
