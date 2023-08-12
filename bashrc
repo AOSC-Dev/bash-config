@@ -36,7 +36,6 @@ shopt -s \
     histverify \
     cdspell \
     autocd \
-    cdable_vars \
     no_empty_cmd_completion \
     extglob \
     globstar \
