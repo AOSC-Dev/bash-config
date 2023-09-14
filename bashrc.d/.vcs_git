@@ -1,5 +1,4 @@
-# bashrc extra functions written for AOSC OSes, package "git"
-# by Arthur Wang
+# bashrc extra functions written for AOSC OS, package "git"
 
 # Aliases, mostly from http://blog.sina.com.cn/s/blog_630c58cb01011uid.html
 alias g="git status"
@@ -24,7 +23,6 @@ alias gdca="git diff --cached"
 alias gbl="git blame"
 alias gps="git push"
 alias gpl="git pull"
-
 
 # Prompt
 if command -v bash-git-status 2>&1>/dev/null; then
