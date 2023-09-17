@@ -94,7 +94,7 @@ _ssh_session() {
 	# Store error code.
 	err="$?"
 	# This if branch would overwrite the current error code.
-	if [[ $(pstree -s $$) = *sshd* ]]; then
+	if [[ x"$SSH_CONNECTION" != "x" ]]; then
 		echo '(ssh)'
 	fi
 	# Load error code.
