@@ -10,33 +10,6 @@
 # ~/.bash_profile.  Personal aliases and functions should go into
 # ~/.bashrc.
 
-# Set up PATH and MANPATH
-unset PATH MANPATH
-_IFS=' 	
-' # $' \t\n'
-IFS='
-' # $'\n'
-for pth in $(cat /etc/paths.d/._* /etc/paths /etc/paths.d/*); do
-	case "$pth" in \#*) continue;; esac
-	PATH="$PATH:$pth"
-done 2>/dev/null
-
-for pth in $(cat /etc/manpaths.d/._* /etc/manpaths /etc/manpaths.d/*); do
-	case "$pth" in \#*) continue;; esac
-	MANPATH="$MANPATH:$pth"
-done 2>/dev/null
-IFS="$_IFS"
-
-: ${PATH=/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin}
-: ${MANPATH=/usr/share/man:/usr/local/share/man}
-export PATH MANPATH
-
-# Setup some environment variables.
-export HISTFILESIZE=4096
-
-# Timezone variable $TZ, Wine and stuff alike need it.
-export TZ="$(readlink /etc/localtime | sed -e 's/^\.\.//g' -e 's@/usr/share/zoneinfo/@@')"
-
 # Source profile scripts
 for script in /etc/profile.d/* ; do
 	case "$script" in
