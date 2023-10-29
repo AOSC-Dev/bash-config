@@ -23,6 +23,7 @@ alias gdca="git diff --cached"
 alias gbl="git blame"
 alias gps="git push"
 alias gpl="git pull"
+alias gcp="git cherry-pick"
 
 # Prompt
 if command -v bash-git-status 2>&1>/dev/null; then
