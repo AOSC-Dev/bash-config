@@ -157,7 +157,7 @@ IFS="$_IFS"
 export PATH MANPATH
 
 # Setup some environment variables.
-export HISTFILESIZE=4096
+export HISTFILESIZE="${HISTFILESIZE:-4096}"
 
 # Timezone variable $TZ, Wine and stuff alike need it.
 export TZ="$(readlink /etc/localtime | sed -e 's/^\.\.//g' -e 's@/usr/share/zoneinfo/@@')"
