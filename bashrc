@@ -49,6 +49,9 @@ alias ll='ls -Flh'
 alias la='ls -AF'
 for c in {e,f,}grep {v,}dir ls; do alias $c="$c --color=auto"; done
 
+# ip color
+alias ip='ip --color=auto'
+
 # space and time efficient cp
 alias cp='cp --reflink=auto --sparse=always'
 
