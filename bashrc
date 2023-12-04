@@ -128,6 +128,8 @@ fi
 # Extra Aliases for those lazy ones :)
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
 alias nano='nano -w -u'
 alias ed='ed -p: -v'
 
