@@ -38,10 +38,13 @@ shopt -s \
     no_empty_cmd_completion \
     extglob \
     globstar \
-    checkhash \
     checkwinsize
 HISTIGNORE='&:[bf]g:exit'
 HISTCONTROL='ignorespace'
+
+# Disable executable path hashing. It gets confusing quickly, as the same
+# command can in fact exist in multiple PATH locations.
+set +h
 
 # Colors
 alias l='ls -AFlh'
