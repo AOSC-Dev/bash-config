@@ -129,10 +129,16 @@ fi
 
 
 # Extra Aliases for those lazy ones :)
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias ......='cd ../../../../..'
+gen_dotdotdot() {
+	local _i='cd ..'
+	local _ii='..'
+	for i in {0..16}; do
+		alias $_ii="$_i"
+		_i+='/..'
+		_ii+='.'
+	done
+}
+gen_dotdotdot
 alias nano='nano -w -u'
 alias ed='ed -p: -v'
 
