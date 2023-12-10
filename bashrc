@@ -150,7 +150,11 @@ FIGNORE='~'
 TIMEFORMAT=$'\nreal\t%3lR\t%P%%\nuser\t%3lU\nsys\t%3lS'
 
 # Set up PATH and MANPATH
-unset PATH MANPATH
+# WSL compatibility (retain PATH from Windows host).
+if [[ ! -v WSL_DISTRO_NAME ]]; then
+	unset PATH
+fi
+unset MANPATH
 _IFS='  
 ' # $' \t\n'
 IFS='
@@ -166,7 +170,12 @@ for pth in $(cat /etc/manpaths.d/._* /etc/manpaths /etc/manpaths.d/*); do
 done 2>/dev/null
 IFS="$_IFS"
 
-: ${PATH=$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin}
+# WSL compatibility (retain PATH from Windows host).
+if [[ ! -v WSL_DISTRO_NAME ]]; then
+	: ${PATH=$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin}
+else
+	: ${PATH=$PATH:$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin}
+fi
 : ${MANPATH=/usr/share/man:/usr/local/share/man}
 export PATH MANPATH
 
