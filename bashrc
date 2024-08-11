@@ -108,6 +108,22 @@ _ssh_session() {
 	unset err
 }
 
+# Set up PATH and MANPATH
+# WSL compatibility (retain PATH from Windows host).
+if [[ ! -v WSL_DISTRO_NAME ]]; then
+	unset PATH
+fi
+unset MANPATH
+
+# WSL compatibility (retain PATH from Windows host).
+if [[ ! -v WSL_DISTRO_NAME ]]; then
+	: ${PATH=$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin}
+else
+	: ${PATH=$PATH:$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin}
+fi
+: ${MANPATH=/usr/share/man:/usr/local/share/man}
+export PATH MANPATH
+
 # Base functions ready. Let's load bashrc.d.
 for script in /etc/bashrc.d/*; do . "$script"; done
 
@@ -126,7 +142,6 @@ if [[ "$EUID" == 0 ]] ; then
 else
   PS1="\[$YELLOW\]\$(_ssh_session)\[$NORMAL\]\[$GREEN\]\u\[$BOLD\]@\[$NORMAL\]\h [ \W\$(_vcs_status) ]\[$GREEN\] \$(_ret_prompt) \[$NORMAL\]"
 fi
-
 
 # Extra Aliases for those lazy ones :)
 gen_dotdotdot() {
@@ -149,12 +164,6 @@ _is_posix || which --version 2>/dev/null | grep -q GNU && alias which='(alias; d
 FIGNORE='~'
 TIMEFORMAT=$'\nreal\t%3lR\t%P%%\nuser\t%3lU\nsys\t%3lS'
 
-# Set up PATH and MANPATH
-# WSL compatibility (retain PATH from Windows host).
-if [[ ! -v WSL_DISTRO_NAME ]]; then
-	unset PATH
-fi
-unset MANPATH
 _IFS='  
 ' # $' \t\n'
 IFS='
@@ -169,15 +178,6 @@ for pth in $(cat /etc/manpaths.d/._* /etc/manpaths /etc/manpaths.d/*); do
         MANPATH="$MANPATH:$pth"
 done 2>/dev/null
 IFS="$_IFS"
-
-# WSL compatibility (retain PATH from Windows host).
-if [[ ! -v WSL_DISTRO_NAME ]]; then
-	: ${PATH=$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin}
-else
-	: ${PATH=$PATH:$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin}
-fi
-: ${MANPATH=/usr/share/man:/usr/local/share/man}
-export PATH MANPATH
 
 # Setup some environment variables.
 export HISTFILESIZE="${HISTFILESIZE:-4096}"
