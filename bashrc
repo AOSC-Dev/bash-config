@@ -63,7 +63,7 @@ alias cp='cp --reflink=auto --sparse=always'
 # Those are actually bold colors.
 _aosc_bashrc_colors='NORMAL BOLD RED GREEN CYAN IRED YELLOW'
 NORMAL='\e[0m'
-BOLD='\e[1;37m'
+BOLD='\e[1m'
 RED='\e[1;31m'
 GREEN='\e[1;32m'
 CYAN='\e[1;36m'
@@ -138,9 +138,9 @@ type _vcs_status &>/dev/null || \
 # Well, forget it.
 
 if [[ "$EUID" == 0 ]] ; then
-  PS1="\[$YELLOW\]\$(_ssh_session)\[$NORMAL\]\[$RED\]\u\[$BOLD\]@\[$NORMAL\]\h [ \W\$(_vcs_status) ]\[$RED\] \$(_ret_prompt) \[$NORMAL\]"
+  PS1="\[$YELLOW\]\$(_ssh_session)\[$NORMAL\]\[$RED\]\u\[$NORMAL\]\[$BOLD\]@\[$NORMAL\]\h [ \W\$(_vcs_status) ]\[$RED\] \$(_ret_prompt) \[$NORMAL\]"
 else
-  PS1="\[$YELLOW\]\$(_ssh_session)\[$NORMAL\]\[$GREEN\]\u\[$BOLD\]@\[$NORMAL\]\h [ \W\$(_vcs_status) ]\[$GREEN\] \$(_ret_prompt) \[$NORMAL\]"
+  PS1="\[$YELLOW\]\$(_ssh_session)\[$NORMAL\]\[$GREEN\]\u\[$NORMAL\]\[$BOLD\]@\[$NORMAL\]\h [ \W\$(_vcs_status) ]\[$GREEN\] \$(_ret_prompt) \[$NORMAL\]"
 fi
 
 # Extra Aliases for those lazy ones :)
