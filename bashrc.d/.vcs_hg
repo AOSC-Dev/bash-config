@@ -16,11 +16,18 @@ alias ha='hg add .'
 # From http://mediadoneright.com/content/ultimate-git-ps1-bash-prompt
 # Modified for hg.
 _ps1_hg_status() {
-	hg branch &>/dev/null || return 1
-	if LC_ALL=C hg status | grep -q ' '; then
-		echo -ne "@\01\e[1m\]\01\e[0;32m\]$(hg branch)\01\e[0m\]"
+	# skip the check if possible, because hg is slow.
+	test -e .hg || return 1
+	hgb=$(hg branch 2>/dev/null) || return 1
+	hgs=$(LC_ALL=C hg status 2>&1)
+	if [ -z "$hgs" ]; then # unmodified
+		echo -e "\01\e[1m\02@\01\e[0;32m\0002$hgb\01\e[0m\02"
+	elif printf %s "$hgs" | grep -q '^[M!]'; then # modified or deleted
+		echo -e "\01\e[1m\02@\01$IRED\0002$hgb\01\e[0m\02"
+	elif printf %s "$hgs" | grep -q '^?'; then # untracked
+		echo -e "\01\e[1m\02@\01\e[0;35m\0002$hgb\01\e[0m\02"
 	else
-		echo -ne "@\01\e[1m\]\01$IRED\]$(hg branch)\01\e[0m\]"
+		echo -e "\01\e[1m\02@\01\e[0;37m\0002$hgb\01\e[0m\02"
 	fi
 }
 
