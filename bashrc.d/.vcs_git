@@ -37,6 +37,9 @@ _ps1_git_status() {
                 local bgs
                 bgs=$(bash-git-status)
                 case "$?" in
+                        1)
+                                return 1
+                        ;;
                         5)
                                 echo -e "\01\e[1m\02@\01\e[0;32m\0002$bgs\01\e[0m\02"
                         ;;
