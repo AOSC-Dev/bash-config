@@ -13,11 +13,28 @@ alias hb='hg branch'
 alias hs='hg status'
 alias ha='hg add .'
 
+_detect_hg() {
+	local _hg_dir="$1"
+	local i=1
+	if [ "${_hg_dir:0:1}" != "/" ] ; then
+		echo "$FUNCNAME: absolute path required" >&2
+		return 1
+	fi
+	# NOTE $_hg_dir is empty when it reaches /.
+	while ! [ "/$_hg_dir" -ef "/" ] ; do
+		if [ -d "$_hg_dir"/.hg ] ; then
+			return 0
+		fi
+		_hg_dir="${_hg_dir%/*}"
+	done
+	[ -d /.hg ]
+}
+
 # From http://mediadoneright.com/content/ultimate-git-ps1-bash-prompt
 # Modified for hg.
 _ps1_hg_status() {
 	# skip the check if possible, because hg is slow.
-	test -e .hg || return 1
+	_detect_hg $PWD || return 1
 	hgb=$(hg branch 2>/dev/null) || return 1
 	hgs=$(LC_ALL=C hg status 2>&1)
 	if [ -z "$hgs" ]; then # unmodified
