@@ -125,7 +125,7 @@ fi
 export PATH MANPATH
 
 # Base functions ready. Let's load bashrc.d.
-for script in /etc/bashrc.d/*; do . "$script"; done
+for script in /etc/bashrc.d/!(_vcs); do . "$script"; done
 
 # The prompt depends on vcs_status! Get one backup anyway.
 type _vcs_status &>/dev/null || \
