@@ -136,8 +136,8 @@ _append_if_needed PATH /usr/sbin
 _append_if_needed PATH /bin
 _append_if_needed PATH /sbin
 
-_append_if_needed MANPATH /usr/share/man
 _append_if_needed MANPATH /usr/local/share/man
+_append_if_needed MANPATH /usr/share/man
 
 export PATH MANPATH
 
