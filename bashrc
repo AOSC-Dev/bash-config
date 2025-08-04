@@ -108,20 +108,37 @@ _ssh_session() {
 	unset err
 }
 
-# Set up PATH and MANPATH
-# WSL compatibility (retain PATH from Windows host).
-if [[ ! -v WSL_DISTRO_NAME ]]; then
-	unset PATH
-fi
-unset MANPATH
+# _append_if_needed(): Append paths to PATH/MANPATH if not already present.
+#
+#   - $1: Name of the *PATH variable
+#   - $2: Path to append
+_append_if_needed() {
+	local _variable="$1"
+	local _pth="$2"
+	shift 2
 
-# WSL compatibility (retain PATH from Windows host).
-if [[ ! -v WSL_DISTRO_NAME ]]; then
-	: ${PATH=$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin}
-else
-	: ${PATH=$PATH:$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin}
-fi
-: ${MANPATH=/usr/share/man:/usr/local/share/man}
+	# Trick to check if a path is already present.
+	# 
+	# Ref: https://stackoverflow.com/a/52564858
+	# 
+	# Expand ${_variable} and see if it contains path to append by using
+	# Bash's "parameter expansion" functionality.
+	if [[ ":${!_variable}:" != *":$_pth:"* ]]; then
+		eval "$_variable=\"${!_variable}:$_pth\""
+	fi
+}
+
+_append_if_needed PATH "$HOME"/.local/bin
+_append_if_needed PATH /usr/local/bin
+_append_if_needed PATH /usr/local/sbin
+_append_if_needed PATH /usr/bin
+_append_if_needed PATH /usr/sbin
+_append_if_needed PATH /bin
+_append_if_needed PATH /sbin
+
+_append_if_needed MANPATH /usr/share/man
+_append_if_needed MANPATH /usr/local/share/man
+
 export PATH MANPATH
 
 # Base functions ready. Let's load bashrc.d.
@@ -170,12 +187,12 @@ IFS='
 ' # $'\n'
 for pth in $(cat /etc/paths.d/._* /etc/paths /etc/paths.d/*); do
         case "$pth" in \#*) continue;; esac
-        PATH="$PATH:$pth"
+        _append_if_needed PATH "$pth"
 done 2>/dev/null
 
 for pth in $(cat /etc/manpaths.d/._* /etc/manpaths /etc/manpaths.d/*); do
         case "$pth" in \#*) continue;; esac
-        MANPATH="$MANPATH:$pth"
+        _append_if_needed MANPATH "$pth"
 done 2>/dev/null
 IFS="$_IFS"
 
