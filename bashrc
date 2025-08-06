@@ -108,41 +108,107 @@ _ssh_session() {
 	unset err
 }
 
-# _append_if_needed(): Append paths to PATH/MANPATH if not already present.
+# PATH and MANPATH Pre-processing
+#
+# To ensure robustness against PATH misconfigurations, we sort and process
+# the default PATHs. After processing, the PATH priority will look as follows (from high to low):
+#
+# 1. User-specified PATHs
+# 2. $HOME/.local/bin
+# 3. PATH defined in /etc/paths.d/
+# 4. Default PATH (session default, in addition to those defined in /etc/profile.d/ and /etc/bashrc.d/)
+# 5. (If in WSL) Windows %PATH%
+_IFS="$IFS"
+IFS=:
+_REVERSED_PATH=""
+for pth in $PATH; do
+	_REVERSED_PATH="$pth${_REVERSED_PATH:+:}$_REVERSED_PATH"
+
+	if [[ -z "$WSL_DISTRO_NAME" ]]; then
+		continue
+	fi
+
+	case "$pth" in
+		"/usr/lib/wsl/lib") ;;
+		"/mnt/"[a-z]"/"*) ;;
+		*) continue;;
+	esac
+
+	_WSL_PATH="${_WSL_PATH}${_WSL_PATH:+:}$pth"
+done
+
+_REVERSED_MANPATH=""
+for pth in $MANPATH; do
+	_REVERSED_MANPATH="$pth${_REVERSED_MANPATH:+:}$_REVERSED_MANPATH"
+done
+
+IFS="$_IFS"
+
+PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/games:/usr/games"
+PATH="$(source /etc/profile; echo $PATH)"
+MANPATH="/usr/local/share/man:/usr/share/man"
+MANPATH="$(source /etc/profile; echo $MANPATH)"
+export PATH MANPATH
+
+# _prepend_if_need(): Prepend paths to PATH/MANPATH if not already present.
 #
 #   - $1: Name of the *PATH variable
 #   - $2: Path to append
-_append_if_needed() {
-	local _variable="$1"
-	local _pth="$2"
+_prepend_if_need() {
+	local variable="$1"
+	local pth="$2"
 	shift 2
 
 	# Trick to check if a path is already present.
 	# 
 	# Ref: https://stackoverflow.com/a/52564858
 	# 
-	# Expand ${_variable} and see if it contains path to append by using
+	# Expand ${variable} and see if it contains path to append by using
 	# Bash's "parameter expansion" functionality.
-	if [[ ":${!_variable}:" != *":$_pth:"* ]]; then
-		eval "$_variable=\"${!_variable}:$_pth\""
+	if [[ ":${!variable}:" != *":$pth:"* ]]; then
+		eval "$variable=\"$pth${!variable:+:}${!variable}\""
 	fi
 }
 
-_append_if_needed PATH "$HOME"/.local/bin
-_append_if_needed PATH /usr/local/bin
-_append_if_needed PATH /usr/local/sbin
-_append_if_needed PATH /usr/bin
-_append_if_needed PATH /usr/sbin
-_append_if_needed PATH /bin
-_append_if_needed PATH /sbin
-
-_append_if_needed MANPATH /usr/local/share/man
-_append_if_needed MANPATH /usr/share/man
-
-export PATH MANPATH
-
 # Base functions ready. Let's load bashrc.d.
 for script in /etc/bashrc.d/!(_vcs); do . "$script"; done
+
+_IFS=' 	
+' # $' \t\n'
+IFS='
+' # $'\n'
+
+for pth in $(cat /etc/paths.d/._* /etc/paths /etc/paths.d/*); do
+        case "$pth" in \#*) continue;; esac
+        _prepend_if_need PATH "$pth"
+done 2>/dev/null
+
+for pth in $(cat /etc/manpaths.d/._* /etc/manpaths /etc/manpaths.d/*); do
+        case "$pth" in \#*) continue;; esac
+        _prepend_if_need MANPATH "$pth"
+done 2>/dev/null
+
+IFS="$_IFS"
+
+if [[ -n "$_WSL_PATH" ]]; then
+	PATH="$PATH:$_WSL_PATH"
+fi
+
+_IFS="$IFS"
+IFS=:
+for pth in "$HOME/.local/bin" $_REVERSED_PATH; do
+	_prepend_if_need PATH "$pth"
+done
+for pth in $_REVERSED_MANPATH; do
+	_prepend_if_need MANPATH "$pth"
+done
+IFS="$_IFS"
+
+# Make sure MANPATH are not going to overwrite the default search paths.
+# See man manpath(5) for details.
+if [[ "$MANPATH" != ":"* ]]; then
+	MANPATH=":$MANPATH"
+fi
 
 # The prompt depends on vcs_status! Get one backup anyway.
 type _vcs_status &>/dev/null || \
@@ -180,21 +246,6 @@ _is_posix || which --version 2>/dev/null | grep -q GNU && alias which='(alias; d
 # Misc stuffs
 FIGNORE='~'
 TIMEFORMAT=$'\nreal\t%3lR\t%P%%\nuser\t%3lU\nsys\t%3lS'
-
-_IFS='  
-' # $' \t\n'
-IFS='
-' # $'\n'
-for pth in $(cat /etc/paths.d/._* /etc/paths /etc/paths.d/*); do
-        case "$pth" in \#*) continue;; esac
-        _append_if_needed PATH "$pth"
-done 2>/dev/null
-
-for pth in $(cat /etc/manpaths.d/._* /etc/manpaths /etc/manpaths.d/*); do
-        case "$pth" in \#*) continue;; esac
-        _append_if_needed MANPATH "$pth"
-done 2>/dev/null
-IFS="$_IFS"
 
 # Setup some environment variables.
 export HISTFILESIZE="${HISTFILESIZE:-4096}"
