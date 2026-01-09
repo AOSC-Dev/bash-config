@@ -1,0 +1,1 @@
+../profile.d/25-coreutils.sh
